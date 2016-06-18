@@ -19,9 +19,9 @@ public:
   glm::vec3 GetRotation() { return m_rotation; }
   glm::vec3 GetScale() { return m_scale; }
 
-  glm::mat4 GetTransform() { return m_transform; }
-  glm::mat4 GetScaleMatrix() { return m_scalingMatrix; }
-  glm::mat4 GetRotationMatrix() { return m_rotationMatrix; }
+  const glm::mat4 &GetTransformationMatrix() { return m_transform; }
+  const glm::mat4 &GetScaleMatrix() { return m_scalingMatrix; }
+  const glm::mat4 &GetRotationMatrix() { return m_rotationMatrix; }
 
 private:
   void UpdateRotation(); //call when a rotate or setrotation is called

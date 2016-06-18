@@ -1,6 +1,6 @@
 #include "World.h"
 
-void WorldSingleton::Update(float a_dt)
+void WorldSingleton::Update()
 {
   // handle any events in the window
   sf::Event event;
@@ -13,7 +13,7 @@ void WorldSingleton::Update(float a_dt)
     // update the view to the new size of the window
     if (event.type == sf::Event::Resized)
     {
-      m_viewport.setSize(sf::Vector2f(event.size.width, event.size.height));
+      m_viewport.setSize(sf::Vector2f((float)event.size.width, (float)event.size.height));
       m_window.setView(m_viewport);
     }
   }
@@ -21,11 +21,27 @@ void WorldSingleton::Update(float a_dt)
   // update delta time
   m_dt = m_clock.getElapsedTime().asSeconds() - m_lastFrameTime;
   m_lastFrameTime = m_clock.getElapsedTime().asSeconds();
-
-  // start update by clearing screen
-  m_window.clear(sf::Color(50, 50, 50, 255));
-
   
+  //Camera movement
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) m_mainCamera.Move(glm::vec3( 1, 0, 0), m_dt);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) m_mainCamera.Move(glm::vec3(-1, 0, 0), m_dt);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) m_mainCamera.Move(glm::vec3(0, -1, 0), m_dt);
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) m_mainCamera.Move(glm::vec3(0,  1, 0), m_dt);
+
+  // now update all game objects in the world
+  for (auto go : m_gameObjects)
+    go.Update(m_dt);
+}
+
+void WorldSingleton::Render()
+{
+  // start update by clearing screen
+  m_window.clear(sf::Color(100, 100, 255, 255));
+
+  for (auto go : m_gameObjects)
+  {
+    go.Render(m_window);
+  }
 
   // display everything to the screen
   m_window.display();
