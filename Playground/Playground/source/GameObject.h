@@ -1,24 +1,29 @@
 #pragma once
 #include "Includes.h"
+#include <vector>
 #include "TransformComponent.h"
-#include <SFML/Graphics.hpp>
+#include "GameobjectComponent.h"
 
 class GameObject
 {
 public:
   GameObject();
-  ~GameObject();
+  virtual ~GameObject();
 
-  void Update(float a_dt);
-  void Render(sf::RenderWindow &a_window);
+  virtual void Initialise();
+  virtual void Update(float a_dt);
 
-  TransformComponent &GetTransform() { return m_transform; }
+  bool HasBeenInitialised() { return m_initialised; }
+
+  TransformComponent* GetTransform() { return m_transform; }
+
+  void AddComponent(GameobjectComponent* a_component);
+
+protected:
+  TransformComponent* m_transform;
 
 private:
-  TransformComponent m_transform;
-
-  // for now just render 1 sprite per gameobject
-  sf::Texture m_texture;
-  sf::Sprite m_sprite;
+  std::vector<GameobjectComponent*> m_components;
+  bool m_initialised;
 };
 

@@ -3,35 +3,40 @@
 #include "World.h"
 
 
-GameObject::GameObject()
+GameObject::GameObject() : m_initialised(false), m_transform(nullptr)
 {
-  // construct a basic sprite
-  if (!m_texture.loadFromFile("../assets/textures/sprite1.png"))
-  {
-    printf("Error: could not load texture, gameobject.cpp");
-  }
-  m_sprite.setTexture(m_texture);
-  m_sprite.setPosition(sf::Vector2f(0, 0));
-  // set origin to centre of the sprite
-  m_sprite.setOrigin(m_sprite.getTexture()->getSize().x * 0.5f, m_sprite.getTexture()->getSize().y * 0.5f);
 }
 
 GameObject::~GameObject()
 {
+  // destroy all components
+  for (auto comp : m_components)
+    delete comp;
+
+  delete m_transform;
+}
+
+void GameObject::Initialise()
+{
+  // intialise any values that need to be set
+
+  // initialize the transform
+  m_transform = new TransformComponent();
+
+  m_initialised = true;
 }
 
 void GameObject::Update(float a_dt)
 {
-
+  for (auto comp : m_components)
+    comp->Update(a_dt);
 }
 
-void GameObject::Render(sf::RenderWindow &a_window)
+void GameObject::AddComponent(GameobjectComponent * a_component)
 {
-  // use worlds active camera for transformations
-  glm::mat4 matrix = m_transform.GetTransformationMatrix() * World.GetCamera().GetTransform().GetTransformationMatrix();
+  if (!a_component->HasBeenInitialised())
+    a_component->Initialise();
 
-  // draw sprite in screen space position
-  glm::vec3 pos(matrix[3]);
-  m_sprite.setPosition(sf::Vector2f(pos.x, pos.y));
-  a_window.draw(m_sprite);
+  a_component->SetOwner(this);
+  m_components.push_back(a_component);
 }

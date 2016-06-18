@@ -9,6 +9,8 @@ public:
   Camera();
   ~Camera() {}
 
+  void Update(float a_dt);
+
   void Move(glm::vec3 a_direction, float a_deltaTime);
 
   void SetPosition(glm::vec3 a_pos); //set position in world space
