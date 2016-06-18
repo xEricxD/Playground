@@ -2,8 +2,7 @@
 #include "Camera.h"
 #include "World.h"
 
-
-GameObject::GameObject() : m_initialised(false), m_transform(nullptr)
+GameObject::GameObject() : m_initialised(false), m_transform(nullptr), m_gameObjectType(GameObjectType::NONE)
 {
 }
 
@@ -39,4 +38,18 @@ void GameObject::AddComponent(GameobjectComponent * a_component)
 
   a_component->SetOwner(this);
   m_components.push_back(a_component);
+}
+
+std::vector<GameobjectComponent*> &GameObject::GetComponentsByType(ComponentType a_type)
+{
+  std::vector<GameobjectComponent*> returnVec;
+
+  // search through all the components and add the ones with the correct type to the return vector
+  for (auto comp : m_components)
+  {
+    if (comp->GetType() == a_type)
+      returnVec.push_back(comp);
+  }
+
+  return returnVec;
 }

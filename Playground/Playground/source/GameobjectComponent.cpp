@@ -1,7 +1,7 @@
 #include "GameobjectComponent.h"
 #include "World.h"
 
-GameobjectComponent::GameobjectComponent() : m_initialised(false), m_transform(nullptr)
+GameobjectComponent::GameobjectComponent() : m_initialised(false), m_transform(nullptr), m_componentType(ComponentType::NONE)
 {
 
 }

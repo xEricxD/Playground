@@ -49,7 +49,11 @@ void SpriteComponent::LoadTextureFromFile(sf::String a_path)
 {
   // load the texture and set the sprite data
   if (!m_texture.loadFromFile(a_path))
+  {
     printf("Error: could not load texture, sprite.cpp");
+    // failed to load texture, load missing texture instead
+    m_texture.loadFromFile("../assets/textures/missing.png");
+  }
 
   m_sprite.setTexture(m_texture);
   // set origin to centre of the sprite
