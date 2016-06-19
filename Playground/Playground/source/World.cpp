@@ -15,7 +15,7 @@ void WorldSingleton::InitWorld()
 {
   printf("Initializing world..\n");
 
-  InitializeWindow("Playground");
+  InitializeWindow("Playground", sf::Vector2u(1200, 800));
 
   // Add all scenes we want in the world
   TestScene* scene1 = new TestScene();
@@ -66,7 +66,7 @@ void WorldSingleton::InitializeWindow(sf::String a_title, sf::Vector2u a_size)
   m_window.create(sf::VideoMode(10, 10), "");
   m_window.setTitle(a_title);
   m_window.setSize(a_size);
-  m_window.setPosition(sf::Vector2i(500, 200));
+  m_window.setPosition(sf::Vector2i(300, 100));
 
   InitializeViewport(sf::Vector2f((float)a_size.x, (float)a_size.y));
 

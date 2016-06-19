@@ -4,19 +4,19 @@
 
 class GameObject;
 
-// used for searching for components
-enum ComponentType
-{
-  NONE = 0,
-
-  SPRITE,
-
-  COUNT
-};
-
 class GameobjectComponent
 {
 public:
+  // used for searching for components
+  enum ComponentType
+  {
+    NONE = 0,
+
+    SPRITE,
+
+    COUNT
+  };
+
   GameobjectComponent();
   virtual ~GameobjectComponent();
 

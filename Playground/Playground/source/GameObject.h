@@ -4,16 +4,18 @@
 #include "TransformComponent.h"
 #include "GameobjectComponent.h"
 
-enum GameObjectType
-{
-  NONE = 0,
-
-  COUNT
-};
-
 class GameObject
 {
 public:
+  enum GameObjectType
+  {
+    NONE = 0,
+
+    GRID,
+
+    COUNT
+  };
+
   GameObject();
   virtual ~GameObject();
 
@@ -28,7 +30,7 @@ public:
   void AddComponent(GameobjectComponent* a_component);
 
   // Get all components of a certain type attached to the gameobject
-  std::vector<GameobjectComponent*> &GetComponentsByType(ComponentType a_type);
+  std::vector<GameobjectComponent*> GetComponentsByType(GameobjectComponent::ComponentType a_type);
 
 protected:
   TransformComponent* m_transform;

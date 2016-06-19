@@ -40,7 +40,7 @@ void GameObject::AddComponent(GameobjectComponent * a_component)
   m_components.push_back(a_component);
 }
 
-std::vector<GameobjectComponent*> &GameObject::GetComponentsByType(ComponentType a_type)
+std::vector<GameobjectComponent*> GameObject::GetComponentsByType(GameobjectComponent::ComponentType a_type)
 {
   std::vector<GameobjectComponent*> returnVec;
 
