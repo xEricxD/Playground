@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "World.h"
 
-#define MOVEMENT_SPEED 50.0f
+#define MOVEMENT_SPEED 200.0f
 
 Camera::Camera() : m_up(glm::vec3(0, -1, 0)), m_right(glm::vec3(1, 0, 0))
 {

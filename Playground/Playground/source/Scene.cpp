@@ -37,3 +37,17 @@ void Scene::AddGameobject(GameObject* a_object)
 
   m_gameObjects.push_back(a_object);
 }
+
+std::vector<GameObject*> Scene::GetGameObjectsByType(GameObject::GameObjectType a_type)
+{
+  std::vector<GameObject*> returnVec;
+
+  // search through all the components and add the ones with the correct type to the return vector
+  for (auto go : m_gameObjects)
+  {
+    if (go->GetType() == a_type)
+      returnVec.push_back(go);
+  }
+
+  return returnVec;
+}

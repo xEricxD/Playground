@@ -22,9 +22,9 @@ void TestScene::Initialise()
   SpriteComponent* spritecomp = new SpriteComponent("../assets/textures/wizard.png");
   go->AddComponent(spritecomp);
 
-  GridObject* grid = new GridObject(glm::vec2(4, 4), glm::vec2(-2, -2), glm::vec2(64, 64));
+  GridObject* grid = new GridObject(glm::vec2(16, 16), glm::vec2(-8, -8), glm::vec2(64, 64));
   AddGameobject(grid);
-  grid->SetDrawDebug(true, true);
+  grid->SetDrawDebug(true);
 }
 
 void TestScene::Update(float a_dt)

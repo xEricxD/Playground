@@ -12,6 +12,7 @@ public:
     NONE = 0,
 
     GRID,
+    ASTARPATHFINDER,
 
     COUNT
   };
@@ -24,6 +25,7 @@ public:
 
   bool HasBeenInitialised() { return m_initialised; }
 
+  GameObjectType GetType() { return m_gameObjectType; }
   TransformComponent* GetTransform() { return m_transform; }
 
   // Add a new component to the gameobject. The component will be initiliased in this function

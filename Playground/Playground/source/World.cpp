@@ -60,6 +60,11 @@ void WorldSingleton::Update()
   m_window.display();
 }
 
+std::vector<GameObject*> WorldSingleton::GetGameObjectsByType(GameObject::GameObjectType a_type)
+{
+  return m_activeScene->GetGameObjectsByType(a_type);
+}
+
 
 void WorldSingleton::InitializeWindow(sf::String a_title, sf::Vector2u a_size)
 {

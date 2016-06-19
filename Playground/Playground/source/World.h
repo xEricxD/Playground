@@ -26,6 +26,8 @@ public:
   sf::RenderWindow& GetWindow() { return m_window; }
   sf::View& GetViewport() { return m_viewport; }
 
+  std::vector<GameObject*> GetGameObjectsByType(GameObject::GameObjectType a_type);
+
   float GetWorldDeltaTime() { return m_dt; }
 
   Camera &GetCamera() { return m_mainCamera; }

@@ -19,6 +19,7 @@ GridObject::~GridObject()
 void GridObject::Initialise()
 {
   GameObject::Initialise();
+  m_gameObjectType = GameObject::GameObjectType::GRID;
 
   GenerateGrid();
 }
@@ -192,6 +193,7 @@ void GridObject::DrawDebugGrid()
 
       World.GetWindow().draw(line, 2, sf::Lines);
     }
+
     // draw y lines
     for (int i = 0; i <= m_size.y; i++)
     {

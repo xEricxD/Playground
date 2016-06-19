@@ -6,3 +6,5 @@ Playground/x64
 Playground/Playground/x64
 Playground/Playground/Playground.vcxproj
 Playground/Playground/Playground.vcxproj.filters
+Playground/Playground/bin32/Playground.iobj
+Playground/Playground/bin32/Playground.ipdb

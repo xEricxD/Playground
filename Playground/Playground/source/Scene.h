@@ -12,6 +12,7 @@ public:
   virtual void ShutDown();
 
   void AddGameobject(GameObject* a_object);
+  std::vector<GameObject*> GetGameObjectsByType(GameObject::GameObjectType a_type);
 
 private:
   std::vector<GameObject*> m_gameObjects;
