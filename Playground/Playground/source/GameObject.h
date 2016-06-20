@@ -13,6 +13,7 @@ public:
 
     GRID,
     ASTARPATHFINDER,
+    AGENT,
 
     COUNT
   };

@@ -13,6 +13,7 @@ public:
     NONE = 0,
 
     SPRITE,
+    GRIDNAVIGATION,
 
     COUNT
   };

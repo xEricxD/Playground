@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 
+class AgentObject;
+
 class TestScene : public Scene
 {
 public:
@@ -10,5 +12,8 @@ public:
   virtual void Initialise();
   virtual void Update(float a_dt);
   virtual void ShutDown();
+
+private:
+  AgentObject* m_agent; // TODO - temp agent
 };
 

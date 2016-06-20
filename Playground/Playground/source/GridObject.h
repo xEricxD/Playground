@@ -54,6 +54,7 @@ public:
   void SetGridOffset(glm::vec2 a_offset) { m_offset = a_offset; }
 
   void SetDrawDebug(bool a_value, bool a_drawSimple = true) { m_drawDebug = a_value, m_drawSimple = a_drawSimple; }
+  void ClearGrid();
 
 private:
   void DrawDebugGrid();

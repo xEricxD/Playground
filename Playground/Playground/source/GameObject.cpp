@@ -2,6 +2,8 @@
 #include "Camera.h"
 #include "World.h"
 
+// TODO - move construct of transform to constructor, and update all gameobjects initialises once they have all been created
+
 GameObject::GameObject() : m_initialised(false), m_transform(nullptr), m_gameObjectType(GameObjectType::NONE)
 {
 }

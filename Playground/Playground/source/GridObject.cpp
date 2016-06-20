@@ -167,16 +167,25 @@ void GridObject::FindNeighbors(Node & a_node)
   }
 }
 
+void GridObject::ClearGrid()
+{
+  for (Node &node : m_grid)
+  {
+    node.f = node.h = node.g = 0;
+    node.listStatus = ListStatus::NONE;
+    node.parentNode = nullptr;
+  }
+}
+
 void GridObject::DrawDebugGrid()
 {
-  // TODO - one of these draws has a wrong offset, find out which one and fix it
-
   // get the view matrix to get the correct draw position
   glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
   if (m_drawSimple)
   {
+    // TODO - draw simple has wrong offset -> fix!
     glm::vec2 startPosition(m_offset.x * m_nodeSize.x, m_offset.y * m_nodeSize.y);
 
     // simply draw the line of the grid, not individual nodes

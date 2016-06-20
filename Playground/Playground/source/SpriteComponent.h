@@ -9,7 +9,7 @@ public:
   SpriteComponent();
   SpriteComponent(sf::String a_textureFileName);
 
-  virtual ~SpriteComponent();
+  virtual ~SpriteComponent() override;
 
   virtual void Initialise() override;
   virtual void Update(float a_dt) override;

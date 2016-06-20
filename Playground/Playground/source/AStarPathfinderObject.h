@@ -4,6 +4,7 @@
 #include "PathfindingStructs.h"
 #include <queue>
 
+
 class AStarPathfinderObject : public GameObject
 {
 public:

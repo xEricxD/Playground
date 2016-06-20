@@ -1,5 +1,6 @@
 #include "AStarPathfinderObject.h"
-
+#include "World.h"
+#include "AgentObject.h"
 
 AStarPathfinderObject::AStarPathfinderObject()
 {
@@ -14,6 +15,10 @@ void AStarPathfinderObject::Initialise()
   GameObject::Initialise();
 
   m_gameObjectType = GameObject::GameObjectType::ASTARPATHFINDER;
+
+  std::vector<GameObject*> grid = World.GetGameObjectsByType(GameObject::GameObjectType::GRID);
+  if (grid.size())
+    m_grid = (GridObject*)grid[0];
 }
 
 void AStarPathfinderObject::RequestPath(GameObject * a_requester, glm::vec2 a_startPosition, glm::vec2 a_goalPosition)
@@ -22,8 +27,8 @@ void AStarPathfinderObject::RequestPath(GameObject * a_requester, glm::vec2 a_st
   Node* goal = m_grid->GetNodeByPosition(a_goalPosition);
   if (start && goal)
     RequestPath(a_requester, start, goal);
-  //else
-  // TODO -> send requester path fail message
+  else
+    ((AgentObject*)a_requester)->GetNavigationComponent()->PathRequestFailed();
 }
 
 void AStarPathfinderObject::RequestPath(GameObject * a_requester, Node * a_startNode, Node * a_goalNode)
@@ -42,6 +47,7 @@ void AStarPathfinderObject::Update(float a_dt)
 
   while (!m_pathQueue.empty()) // as long as the path queue isn't empty, there is still agents waiting for a path
   {
+    ClearGrid();
     PathfindingPacket currentPacket = m_pathQueue.front();
     currentPacket.startNode->parentNode = nullptr;
     m_openList.push_back(currentPacket.startNode);
@@ -60,7 +66,7 @@ void AStarPathfinderObject::SearchLoop(PathfindingPacket a_packet)
     {
       // no more nodes on open list, we did not find a path to our goal
       m_pathQueue.pop();
-      // TODO -> send requester a path fail message
+      ((AgentObject*)a_packet.requestingActor)->GetNavigationComponent()->PathRequestFailed();
       return;
     }
 
@@ -99,9 +105,8 @@ void AStarPathfinderObject::SearchLoop(PathfindingPacket a_packet)
   // we found our goal
   Path* path = new Path();
   CreatePath(a_packet.goalNode, path);
-  // TODO -> send requester the found path
+  ((AgentObject*)a_packet.requestingActor)->GetNavigationComponent()->SetPath(path);
   m_pathQueue.pop();
-  ClearGrid();
 }
 
 void AStarPathfinderObject::AddNeighbors(Node * a_node)
@@ -158,25 +163,15 @@ void AStarPathfinderObject::CreatePath(Node* a_node, Path* a_path)
   // backtrace through parents to find our path points
   a_path->path.push_back(a_node->position);
   if (a_node->parentNode)
-    CreatePath(a_node, a_path);
+    CreatePath(a_node->parentNode, a_path);
 }
 
 void AStarPathfinderObject::ClearGrid()
 { 
-  //Reset all used nodes
-  for (Node* node : m_closedList)
-  {
-    node->f = node->h = node->g = 0;
-    node->listStatus = ListStatus::NONE;
-    node->parentNode = nullptr;
-  }
-  m_closedList.clear();
+  // TODO - only reset nodes that have been affected
+  m_grid->ClearGrid();
 
-  for (Node* node : m_openList)
-  {
-    node->f = node->h = node->g = 0;
-    node->listStatus = ListStatus::NONE;
-    node->parentNode = nullptr;
-  }
+  //Reset all used nodes
+  m_closedList.clear();
   m_openList.clear();
 }

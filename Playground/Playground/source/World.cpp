@@ -19,10 +19,9 @@ void WorldSingleton::InitWorld()
 
   // Add all scenes we want in the world
   TestScene* scene1 = new TestScene();
+  m_activeScene = scene1;
   scene1->Initialise();
   m_scenes.push_back(scene1);
-
-  m_activeScene = scene1;
 
   printf("World initialized..\n");
 }
