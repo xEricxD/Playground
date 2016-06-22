@@ -21,4 +21,5 @@ void GameobjectComponent::Initialise()
 
 void GameobjectComponent::Update(float a_dt)
 {
+  a_dt;
 }

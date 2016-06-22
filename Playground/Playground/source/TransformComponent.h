@@ -15,9 +15,9 @@ public:
   void Rotate(glm::vec3 a_rotation);
   void Scale(glm::vec3 a_scale);
 
-  glm::vec3 GetPosition() { return m_position; }
-  glm::vec3 GetRotation() { return m_rotation; }
-  glm::vec3 GetScale() { return m_scale; }
+  glm::vec3 &GetPosition() { return m_position; }
+  glm::vec3 &GetRotation() { return m_rotation; }
+  glm::vec3 &GetScale() { return m_scale; }
 
   const glm::mat4 &GetTransformationMatrix() { return m_transform; }
   const glm::mat4 &GetScaleMatrix() { return m_scalingMatrix; }
