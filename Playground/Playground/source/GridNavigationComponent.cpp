@@ -38,6 +38,7 @@ void GridNavigationComponent::TraversePath(float a_dt)
   if (m_activePath->path.size() > 0)
   {
     // traverse the path
+    a_dt;
   }
   else // reset the path to null
   {

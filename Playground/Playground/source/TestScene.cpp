@@ -54,7 +54,7 @@ void TestScene::Update(float a_dt)
     sf::Vector2i mouse = sf::Mouse::getPosition(World.GetWindow());
     sf::Vector2i halfscreen = sf::Vector2i((int)(World.GetWindow().getSize().x * 0.5f),(int)(World.GetWindow().getSize().y * 0.5f));
 
-    sf::Vector2i pos = mouse - halfscreen - sf::Vector2i(drawPosition.x, drawPosition.y);
+    sf::Vector2i pos = mouse - halfscreen - sf::Vector2i((int)drawPosition.x, (int)drawPosition.y);
     m_agent->MoveToLocation(glm::vec2(pos.x, pos.y));
   }
 }
