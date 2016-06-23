@@ -14,6 +14,7 @@ public:
 
     SPRITE,
     GRIDNAVIGATION,
+    GRIDSAVING,
 
     COUNT
   };
@@ -23,6 +24,7 @@ public:
 
   virtual void Initialise();
   virtual void Update(float a_dt);
+  virtual void ShutDown();
 
   ComponentType GetType() { return m_componentType; }
   TransformComponent* GetTransform() { return m_transform; }

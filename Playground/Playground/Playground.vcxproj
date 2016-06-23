@@ -26,6 +26,7 @@
     <ClCompile Include="source\GameobjectComponent.cpp" />
     <ClCompile Include="source\GridNavigationComponent.cpp" />
     <ClCompile Include="source\GridObject.cpp" />
+    <ClCompile Include="source\GridSavingComponent.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Scene.cpp" />
     <ClCompile Include="source\SpriteComponent.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="source\GameobjectComponent.h" />
     <ClInclude Include="source\GridNavigationComponent.h" />
     <ClInclude Include="source\GridObject.h" />
+    <ClInclude Include="source\GridSavingComponent.h" />
     <ClInclude Include="source\Includes.h" />
     <ClInclude Include="source\PathfindingStructs.h" />
     <ClInclude Include="source\Scene.h" />

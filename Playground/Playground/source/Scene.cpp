@@ -26,6 +26,9 @@ void Scene::ShutDown()
 {
   // delete all gameobjects
   for (auto go : m_gameObjects)
+    go->ShutDown();
+
+  for (auto go : m_gameObjects)
     delete go;
 }
 

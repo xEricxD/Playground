@@ -23,6 +23,7 @@ public:
 
   virtual void Initialise();
   virtual void Update(float a_dt);
+  virtual void ShutDown();
 
   bool HasBeenInitialised() { return m_initialised; }
 

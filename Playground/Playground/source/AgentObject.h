@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "GridNavigationComponent.h"
 
+class SpriteComponent;
+
 class AgentObject : public GameObject
 {
 public:
@@ -15,6 +17,7 @@ public:
   GridNavigationComponent* GetNavigationComponent() { return m_navigationComponent; }
 
 private:
-  GridNavigationComponent* m_navigationComponent;
+  GridNavigationComponent* m_navigationComponent; 
+  SpriteComponent* m_spriteComponent;
 };
 

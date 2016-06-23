@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include <SFML/Graphics.hpp>
 
 enum ListStatus
 {
@@ -55,12 +56,17 @@ public:
 
   void SetDrawDebug(bool a_value, bool a_drawSimple = true) { m_drawDebug = a_value, m_drawSimple = a_drawSimple; }
   void ClearGrid();
+  void GenerateGrid();
+  void UpdateNeighbors();
 
 private:
   void DrawDebugGrid();
 
-  void GenerateGrid();
   void FindNeighbors(Node &a_node);
+
+  // TODO -> render differently?
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
   // Array with all the grid nodes
   std::vector<Node> m_grid;

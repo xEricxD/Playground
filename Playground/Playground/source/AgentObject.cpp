@@ -1,5 +1,7 @@
 #include "AgentObject.h"
+#include "SpriteComponent.h"
 
+// TODO - add better support for sprite changing / updating etc
 
 AgentObject::AgentObject()
 {
@@ -18,6 +20,8 @@ void AgentObject::Initialise()
 
   m_gameObjectType = GameObject::GameObjectType::AGENT;
 
+  m_spriteComponent = new SpriteComponent("../assets/textures/wizard.png");
+  AddComponent(m_spriteComponent);
 }
 
 void AgentObject::Update(float a_dt)

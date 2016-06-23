@@ -25,7 +25,7 @@ void AStarPathfinderObject::RequestPath(GameObject * a_requester, glm::vec2 a_st
 {
   Node* start = m_grid->GetNodeByPosition(a_startPosition);
   Node* goal = m_grid->GetNodeByPosition(a_goalPosition);
-  if (start && goal)
+  if (start && start->available && goal && goal->available)
     RequestPath(a_requester, start, goal);
   else
     ((AgentObject*)a_requester)->GetNavigationComponent()->PathRequestFailed();
@@ -113,7 +113,7 @@ void AStarPathfinderObject::AddNeighbors(Node * a_node)
 {
   for (int i = 0; i < 8; i++) // loop over all neighbors
   {
-    if (a_node->neighbors[i])
+    if (a_node->neighbors[i] && a_node->neighbors[i]->available)
     {
       Node* neighbor = a_node->neighbors[i];
       if (neighbor->listStatus != ListStatus::ON_CLOSED)

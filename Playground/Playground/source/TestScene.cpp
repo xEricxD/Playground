@@ -18,13 +18,7 @@ TestScene::~TestScene()
 void TestScene::Initialise()
 {
   Scene::Initialise();
-
-  GameObject* go = new GameObject();
-  // add the object to the scene first to make sure it is initialised
-  AddGameobject(go);
-  SpriteComponent* spritecomp = new SpriteComponent("../assets/textures/wizard.png");
-  go->AddComponent(spritecomp);
-
+  
   GridObject* grid = new GridObject(glm::vec2(16, 16), glm::vec2(-8, -8), glm::vec2(64, 64));
   AddGameobject(grid);
   grid->SetDrawDebug(true, true);

@@ -23,3 +23,7 @@ void GameobjectComponent::Update(float a_dt)
 {
   a_dt;
 }
+
+void GameobjectComponent::ShutDown()
+{
+}

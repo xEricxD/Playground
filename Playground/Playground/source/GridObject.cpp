@@ -1,5 +1,6 @@
 #include "GridObject.h"
 #include "World.h"
+#include "GridSavingComponent.h"
 
 GridObject::GridObject() : m_size(glm::vec2(32, 32)), m_nodeSize(glm::vec2(64, 64)), m_offset(glm::vec2(0)),
                            m_drawDebug(false)
@@ -20,13 +21,33 @@ void GridObject::Initialise()
 {
   GameObject::Initialise();
   m_gameObjectType = GameObject::GameObjectType::GRID;
-
   GenerateGrid();
+
+  GridSavingComponent* comp = new GridSavingComponent(true, false);
+  AddComponent(comp);
+
+  if (m_texture.loadFromFile("../assets/textures/wall.png"))
+  {
+    m_sprite.setTexture(m_texture);
+    m_sprite.setOrigin(m_sprite.getTexture()->getSize().x * 0.5f, m_sprite.getTexture()->getSize().y * 0.5f);
+  }
 }
 
 void GridObject::Update(float a_dt)
 {
   GameObject::Update(a_dt);
+
+  // render the walls
+  for (auto node : m_grid)
+  {
+    if (!node.available)
+    {
+      glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+      glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
+      m_sprite.setPosition(sf::Vector2f(node.position.x + drawPosition.x, node.position.y + drawPosition.y));
+      World.GetWindow().draw(m_sprite);
+    }
+  }
 
   if (m_drawDebug)
     DrawDebugGrid();
@@ -112,6 +133,18 @@ void GridObject::GenerateGrid()
     FindNeighbors(m_grid[i]);
 }
 
+void GridObject::UpdateNeighbors()
+{
+  int gridSize = (int)(m_size.x * m_size.y);
+  // now search for all the neighbors of each node
+  for (int i = 0; i < gridSize; i++)
+  {
+    for (int j = 0; j < 8; j++)
+      m_grid[i].neighbors[j] = nullptr;
+    FindNeighbors(m_grid[i]);
+  }
+}
+
 void GridObject::FindNeighbors(Node & a_node)
 {
   // if the node isn't available, we will never need it's neighbors, so there's no point setting them
@@ -185,15 +218,14 @@ void GridObject::DrawDebugGrid()
 
   if (m_drawSimple)
   {
-    // TODO - draw simple has wrong offset -> fix!
     glm::vec2 startPosition(m_offset.x * m_nodeSize.x, m_offset.y * m_nodeSize.y);
 
     // simply draw the line of the grid, not individual nodes
     // draw x lines
     for (int i = 0; i <= m_size.x; i++)
     {
-      float xStart = startPosition.x + (i * m_nodeSize.x) + (m_nodeSize.x * 0.5f) + drawPosition.x;
-      float yStart = startPosition.y + (m_nodeSize.y * 0.5f) + drawPosition.y;
+      float xStart = startPosition.x + (i * m_nodeSize.x) - (m_nodeSize.x * 0.5f) + drawPosition.x;
+      float yStart = startPosition.y - (m_nodeSize.y * 0.5f) + drawPosition.y;
       sf::Vertex line[]
       {
         sf::Vertex(sf::Vector2f(xStart, yStart)),
@@ -206,8 +238,8 @@ void GridObject::DrawDebugGrid()
     // draw y lines
     for (int i = 0; i <= m_size.y; i++)
     {
-      float xStart = startPosition.x + (m_nodeSize.x * 0.5f) + drawPosition.x;
-      float yStart = startPosition.y + (i * m_nodeSize.y) + (m_nodeSize.y * 0.5f) + drawPosition.y;
+      float xStart = startPosition.x - (m_nodeSize.x * 0.5f) + drawPosition.x;
+      float yStart = startPosition.y + (i * m_nodeSize.y) - (m_nodeSize.y * 0.5f) + drawPosition.y;
       sf::Vertex line[]
       {
         sf::Vertex(sf::Vector2f(xStart, yStart)),

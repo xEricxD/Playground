@@ -33,12 +33,19 @@ void GameObject::Update(float a_dt)
     comp->Update(a_dt);
 }
 
+void GameObject::ShutDown()
+{
+  for (auto comp : m_components)
+    comp->ShutDown();
+}
+
 void GameObject::AddComponent(GameobjectComponent * a_component)
 {
+  a_component->SetOwner(this);
+
   if (!a_component->HasBeenInitialised())
     a_component->Initialise();
 
-  a_component->SetOwner(this);
   m_components.push_back(a_component);
 }
 
