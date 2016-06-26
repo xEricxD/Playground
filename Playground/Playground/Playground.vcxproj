@@ -24,6 +24,7 @@
     <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GameobjectComponent.cpp" />
+    <ClCompile Include="source\GridEditorComponent.cpp" />
     <ClCompile Include="source\GridNavigationComponent.cpp" />
     <ClCompile Include="source\GridObject.cpp" />
     <ClCompile Include="source\GridSavingComponent.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="source\Camera.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameobjectComponent.h" />
+    <ClInclude Include="source\GridEditorComponent.h" />
     <ClInclude Include="source\GridNavigationComponent.h" />
     <ClInclude Include="source\GridObject.h" />
     <ClInclude Include="source\GridSavingComponent.h" />

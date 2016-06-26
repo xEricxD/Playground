@@ -2,7 +2,7 @@
 #include "AStarPathfinderObject.h"
 #include "World.h"
 
-GridNavigationComponent::GridNavigationComponent() : m_activePath(nullptr), m_pathfinder(nullptr)
+GridNavigationComponent::GridNavigationComponent() : m_activePath(nullptr), m_pathfinder(nullptr), m_wander(false)
 {
 }
 
@@ -26,6 +26,16 @@ void GridNavigationComponent::Update(float a_dt)
 {
   GameobjectComponent::Update(a_dt);
 
+  if (m_wander)
+  {
+    if (!m_activePath)
+    {
+      GridObject* grid = m_pathfinder->GetGridObject();
+      if (grid)
+        RequestPath(grid->GetRandomPositionOnGrid());
+    }
+  }
+
   TraversePath(a_dt);
   DrawDebug();
 }
@@ -37,22 +47,39 @@ void GridNavigationComponent::TraversePath(float a_dt)
 
   if (m_activePath->path.size() > 0)
   {
-    // traverse the path
-    a_dt;
-  }
-  else // reset the path to null
-  {
-    delete m_activePath;
-    m_activePath = nullptr;
+    // get our target position
+    glm::vec2 position(m_transform->GetTransformationMatrix() * GetOwner()->GetTransform()->GetTransformationMatrix()[3]);
+    glm::vec2 distanceVector = m_activePath->path.back() - position;
+
+    if (distanceVector.x != 0 || distanceVector.y != 0)
+    {
+      glm::vec3 translation = glm::normalize(glm::vec3(distanceVector.x, distanceVector.y, 0));
+      translation *= 50 * a_dt;
+      GetOwner()->GetTransform()->Translate(translation);
+    }
+
+    // check if we're close enough to pop this node of the path
+    if (glm::length(distanceVector) < 5)
+    {
+      m_activePath->path.pop_back();
+      if (!m_activePath->path.size())
+      {
+        delete m_activePath;
+        m_activePath = nullptr;
+      }
+    }
   }
 }
 
 void GridNavigationComponent::RequestPath(glm::vec2 a_goalPosition, bool a_stopCurrentPath)
 {
+  if (!a_stopCurrentPath && m_activePath)
+    return;
+
   //request a path from the pathfinder
   m_pathfinder->RequestPath(GetOwner(), glm::vec2(GetOwner()->GetTransform()->GetPosition()), a_goalPosition);
   // stop the current navigation if there is any
-  if (a_stopCurrentPath && m_activePath)
+  if (m_activePath)
   {
     delete m_activePath;
     m_activePath = nullptr;

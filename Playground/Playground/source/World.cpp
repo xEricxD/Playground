@@ -1,6 +1,8 @@
 #include "World.h"
 #include "TestScene.h"
 
+#define GAME_SPEED 5
+
 void WorldSingleton::ShutDown()
 {
   printf("Shutting down world..\n");
@@ -46,6 +48,9 @@ void WorldSingleton::Update()
 
   // update delta time
   m_dt = m_clock.getElapsedTime().asSeconds() - m_lastFrameTime;
+  if (m_dt > 0.5f)
+    m_dt = 0.5f;
+
   m_lastFrameTime = m_clock.getElapsedTime().asSeconds();
   
   // start update by clearing screen
@@ -53,7 +58,7 @@ void WorldSingleton::Update()
 
   // update the camera and active scene
   m_mainCamera.Update(m_dt);
-  m_activeScene->Update(m_dt);
+  m_activeScene->Update(m_dt * GAME_SPEED);
 
   // display everything to the screen
   m_window.display();

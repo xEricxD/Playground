@@ -45,6 +45,8 @@ void AStarPathfinderObject::Update(float a_dt)
 {
   GameObject::Update(a_dt);
 
+  //printf("resolving %u paths this frame\n", m_pathQueue.size());
+
   while (!m_pathQueue.empty()) // as long as the path queue isn't empty, there is still agents waiting for a path
   {
     ClearGrid();

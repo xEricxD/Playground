@@ -5,9 +5,6 @@
 
 AgentObject::AgentObject()
 {
-  // initialise the agents navigation component
-  m_navigationComponent = new GridNavigationComponent();
-  AddComponent(m_navigationComponent);
 }
 
 AgentObject::~AgentObject()
@@ -22,6 +19,10 @@ void AgentObject::Initialise()
 
   m_spriteComponent = new SpriteComponent("../assets/textures/wizard.png");
   AddComponent(m_spriteComponent);
+
+  m_navigationComponent = new GridNavigationComponent();
+  AddComponent(m_navigationComponent);
+  m_navigationComponent->SetWander(true);
 }
 
 void AgentObject::Update(float a_dt)

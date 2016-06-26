@@ -15,6 +15,7 @@ public:
     SPRITE,
     GRIDNAVIGATION,
     GRIDSAVING,
+    GRIDEDITOR,
 
     COUNT
   };

@@ -1,6 +1,7 @@
 #include "GridObject.h"
 #include "World.h"
 #include "GridSavingComponent.h"
+#include "GridEditorComponent.h"
 
 GridObject::GridObject() : m_size(glm::vec2(32, 32)), m_nodeSize(glm::vec2(64, 64)), m_offset(glm::vec2(0)),
                            m_drawDebug(false)
@@ -21,10 +22,14 @@ void GridObject::Initialise()
 {
   GameObject::Initialise();
   m_gameObjectType = GameObject::GameObjectType::GRID;
+
   GenerateGrid();
 
-  GridSavingComponent* comp = new GridSavingComponent(true, false);
-  AddComponent(comp);
+  GridSavingComponent* savingComp = new GridSavingComponent(true, false);
+  AddComponent(savingComp);
+
+  GridEditorComponent* editorComp = new GridEditorComponent(false);
+  AddComponent(editorComp);
 
   if (m_texture.loadFromFile("../assets/textures/wall.png"))
   {
@@ -116,7 +121,6 @@ void GridObject::GenerateGrid()
     newNode.position = currentNodePos;
     newNode.gridIndex = counter;
 
-    // TODO - check if all node values are set correctly
     m_grid.push_back(newNode);
     
     if (counter.x < m_size.x - 1)
@@ -133,7 +137,7 @@ void GridObject::GenerateGrid()
     FindNeighbors(m_grid[i]);
 }
 
-void GridObject::UpdateNeighbors()
+void GridObject::UpdateAllNeighbors()
 {
   int gridSize = (int)(m_size.x * m_size.y);
   // now search for all the neighbors of each node
@@ -145,7 +149,52 @@ void GridObject::UpdateNeighbors()
   }
 }
 
-void GridObject::FindNeighbors(Node & a_node)
+void GridObject::UpdateNodeAvailability(Node* a_node)
+{
+  // update the nodes availability
+  a_node->available = !a_node->available;
+
+  std::vector<Node*> currentNeighbors;
+  for (auto neighbor : a_node->neighbors)
+  {
+    if (neighbor)
+      currentNeighbors.push_back(neighbor);
+  }
+  
+  // set all current neighbors to null
+  for (int i = 0; i < 8; i++)
+    a_node->neighbors[i] = nullptr;
+  
+  FindNeighbors(*a_node);
+
+  for (auto neighbor : currentNeighbors)
+  {
+    if (neighbor && neighbor->available)
+    {
+      for (int j = 0; j < 8; j++)
+        neighbor->neighbors[j] = nullptr;
+
+      FindNeighbors(*neighbor);
+    }
+  }
+}
+
+glm::vec2 GridObject::GetRandomPositionOnGrid()
+{
+  int gridSize = (int)(m_size.x * m_size.y);
+  int rnd = rand() % gridSize - 1;
+
+  unsigned int spinCount = 0;
+  while (!m_grid[rnd].available && spinCount < 100)
+  {
+    rnd = rand() % gridSize - 1;
+    spinCount++;
+  }
+  
+  return m_grid[rnd].position;
+}
+
+void GridObject::FindNeighbors(Node& a_node)
 {
   // if the node isn't available, we will never need it's neighbors, so there's no point setting them
   if (!a_node.available)

@@ -23,10 +23,12 @@ public:
   void SetPath(Path* a_path);
 
   void SetDrawDebug(bool a_value) { m_drawDebug = a_value; }
+  void SetWander(bool a_value) { m_wander = a_value; }
 
 private:
   void DrawDebug();
   bool m_drawDebug;
+  bool m_wander;
 
   AStarPathfinderObject* m_pathfinder;
   Path* m_activePath;

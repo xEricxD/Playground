@@ -52,9 +52,9 @@ void GridSavingComponent::SaveGridData(std::string a_filepath)
   file << std::to_string(nodeSize.y) << "\n";
 
   // now store the grid
-  for (int x = 0; x < size.x; x++)
+  for (int y = 0; y < size.y; y++)
   {
-    for (int y = 0; y < size.y; y++)
+    for (int x = 0; x < size.x; x++)
     {
       Node* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
       (n && n->available) ? file << "1 " : file << "0 ";
@@ -124,7 +124,7 @@ void GridSavingComponent::LoadGridData(std::string a_filepath)
       printf("\n");
     }
     // update all neighbors
-    m_grid->UpdateNeighbors();
+    m_grid->UpdateAllNeighbors();
 
     // close the file
     file.close();

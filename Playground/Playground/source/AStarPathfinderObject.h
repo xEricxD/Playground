@@ -18,10 +18,12 @@ public:
   void RequestPath(GameObject* a_requester, glm::vec2 a_startPosition, glm::vec2 a_goalPosition);
   void RequestPath(GameObject* a_requester, Node* a_startNode, Node* a_goalNode);
 
+  GridObject* GetGridObject() { return m_grid; }
+
 private:
-  void SearchLoop(PathfindingPacket a_packet);
-  void AddNeighbors(Node* a_node);
-  void RelaxPath(Node* a_currentNode, Node* a_parentNode, short a_cost);
+  inline void SearchLoop(PathfindingPacket a_packet);
+  inline void AddNeighbors(Node* a_node);
+  inline void RelaxPath(Node* a_currentNode, Node* a_parentNode, short a_cost);
 
   short GetHueristic(Node* a_node);
   void CreatePath(Node* a_node, Path* a_path);
