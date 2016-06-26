@@ -3,6 +3,8 @@
 #include "GridSavingComponent.h"
 #include "GridEditorComponent.h"
 
+// TODO - make automatic grid generator?
+
 GridObject::GridObject() : m_size(glm::vec2(32, 32)), m_nodeSize(glm::vec2(64, 64)), m_offset(glm::vec2(0)),
                            m_drawDebug(false)
 {

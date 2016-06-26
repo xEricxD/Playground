@@ -1,0 +1,9 @@
+************************************************* New debug session ***************************************************************************
+Date: 26-6-2016
+Time: 20:37:1
+Debug Session Length: 109.068459 seconds
+**** A star Debug Information ****
+Number of path requests: 60119
+Total time for all paths: 2653 milliseconds
+Average time per path: 44 Micro Seconds
+

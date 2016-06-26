@@ -1,6 +1,8 @@
 #include "AStarPathfinderObject.h"
 #include "World.h"
 #include "AgentObject.h"
+#include <iostream>
+#include <fstream>
 
 AStarPathfinderObject::AStarPathfinderObject()
 {
@@ -19,6 +21,19 @@ void AStarPathfinderObject::Initialise()
   std::vector<GameObject*> grid = World.GetGameObjectsByType(GameObject::GameObjectType::GRID);
   if (grid.size())
     m_grid = (GridObject*)grid[0];
+}
+
+void AStarPathfinderObject::ShutDown()
+{
+  std::ofstream file;
+  file.open("../assets/saved/debug.txt", std::ios::app);
+
+  file << "**** A star Debug Information ****\n";
+  file << "Number of path requests: " << std::to_string(m_numPathRequests) << "\n";
+  file << "Total time for all paths: " << std::to_string(m_pathTime / 1000) << " milliseconds\n";
+  file << "Average time per path: " << std::to_string(m_pathTime / m_numPathRequests) << " Micro Seconds\n\n";
+
+  file.close();
 }
 
 void AStarPathfinderObject::RequestPath(GameObject * a_requester, glm::vec2 a_startPosition, glm::vec2 a_goalPosition)
@@ -49,6 +64,8 @@ void AStarPathfinderObject::Update(float a_dt)
 
   while (!m_pathQueue.empty()) // as long as the path queue isn't empty, there is still agents waiting for a path
   {
+    m_clock.restart();
+
     ClearGrid();
     PathfindingPacket currentPacket = m_pathQueue.front();
     currentPacket.startNode->parentNode = nullptr;
@@ -56,6 +73,8 @@ void AStarPathfinderObject::Update(float a_dt)
     currentPacket.startNode->listStatus = ListStatus::ON_OPEN;
 
     SearchLoop(currentPacket);
+    m_pathTime += m_clock.getElapsedTime().asMicroseconds();
+    m_numPathRequests++;
   }
 }
 

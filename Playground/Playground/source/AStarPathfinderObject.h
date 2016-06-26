@@ -13,6 +13,7 @@ public:
 
   virtual void Initialise() override;
   virtual void Update(float a_dt) override;
+  virtual void ShutDown() override;
 
   // agents can request this pathfinder for a path via this function
   void RequestPath(GameObject* a_requester, glm::vec2 a_startPosition, glm::vec2 a_goalPosition);
@@ -34,5 +35,10 @@ private:
 
   std::vector<Node*> m_openList;
   std::vector<Node*> m_closedList;
+
+  //debugging clock for path timings
+  sf::Clock m_clock;
+  sf::Int64 m_pathTime;
+  sf::Int64 m_numPathRequests;
 };
 

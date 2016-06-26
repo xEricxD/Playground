@@ -108,7 +108,7 @@ void GridSavingComponent::LoadGridData(std::string a_filepath)
     m_grid->ResizeGrid(size, offset);
 
 
-    printf("map data: \n");
+    //printf("map data: \n");
     // now find invalid cells and turn them into walls
     bool val;
     for (int y = 0; y < size.y; y++)
@@ -116,12 +116,12 @@ void GridSavingComponent::LoadGridData(std::string a_filepath)
       for (int x = 0; x < size.x; x++)
       {
         file >> val;
-        printf("%i ", val);
+        //printf("%i ", val);
         Node* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
         if (n)
           n->available = val;
       }
-      printf("\n");
+      //printf("\n");
     }
     // update all neighbors
     m_grid->UpdateAllNeighbors();
