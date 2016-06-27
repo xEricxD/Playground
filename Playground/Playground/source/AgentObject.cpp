@@ -22,7 +22,6 @@ void AgentObject::Initialise()
 
   m_navigationComponent = new GridNavigationComponent();
   AddComponent(m_navigationComponent);
-  m_navigationComponent->SetWander(true);
 }
 
 void AgentObject::Update(float a_dt)

@@ -6,6 +6,7 @@
 #include "World.h"
 
 #define NUM_AGENTS 5000
+//#define USE_DEBUG_AGENT
 
 TestScene::TestScene()
 {
@@ -28,16 +29,18 @@ void TestScene::Initialise()
   AStarPathfinderObject* pathfinder = new AStarPathfinderObject();
   AddGameobject(pathfinder);
   
-  //m_agent = new AgentObject();
-  //AddGameobject(m_agent);
-  //m_agent->GetNavigationComponent()->SetDrawDebug(true);
-
+#ifdef USE_DEBUG_AGENT
+  m_agent = new AgentObject();
+  AddGameobject(m_agent);
+  m_agent->GetNavigationComponent()->SetDrawDebug(true);
+#else
   for (int i = 0; i < NUM_AGENTS; i++)
   {
     AgentObject* agent = new AgentObject();
     AddGameobject(agent);
-    agent->GetNavigationComponent()->SetDrawDebug(false);
+    agent->GetNavigationComponent()->SetWander(true);
   }
+#endif
 }
 
 void TestScene::Update(float a_dt)
@@ -45,21 +48,20 @@ void TestScene::Update(float a_dt)
   // TODO -> some sort of update order ( or some different way to render objects, based on z-order?)
   Scene::Update(a_dt);
 
-
-  // temporary check to move agent to our mouse position
-  //if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-  //{
-  //  glm::mat4 viewMatrix = glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
-  //  glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
-  //  
-  //
-  //  // use (mouse pos - half screen pos) to help convert to world space
-  //  sf::Vector2i mouse = sf::Mouse::getPosition(World.GetWindow());
-  //  sf::Vector2i halfscreen = sf::Vector2i((int)(World.GetWindow().getSize().x * 0.5f),(int)(World.GetWindow().getSize().y * 0.5f));
-  //
-  //  sf::Vector2i pos = mouse - halfscreen - sf::Vector2i((int)drawPosition.x, (int)drawPosition.y);
-  //  m_agent->MoveToLocation(glm::vec2(pos.x, pos.y));
-  //}
+#ifdef USE_DEBUG_AGENT
+  if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+  {
+    glm::mat4 viewMatrix = glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+    glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
+  
+    // use (mouse pos - half screen pos) to help convert to world space
+    sf::Vector2i mouse = sf::Mouse::getPosition(World.GetWindow());
+    sf::Vector2i halfscreen = sf::Vector2i((int)(World.GetWindow().getSize().x * 0.5f),(int)(World.GetWindow().getSize().y * 0.5f));
+  
+    sf::Vector2i pos = mouse - halfscreen - sf::Vector2i((int)drawPosition.x, (int)drawPosition.y);
+    m_agent->MoveToLocation(glm::vec2(pos.x, pos.y));
+  }
+#endif
 }
 
 void TestScene::ShutDown()

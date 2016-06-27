@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+//#define USE_FASTSTACK
+
 AStarPathfinderObject::AStarPathfinderObject()
 {
 }
@@ -73,6 +75,7 @@ void AStarPathfinderObject::Update(float a_dt)
     currentPacket.startNode->listStatus = ListStatus::ON_OPEN;
 
     SearchLoop(currentPacket);
+
     m_pathTime += m_clock.getElapsedTime().asMicroseconds();
     m_numPathRequests++;
   }
@@ -83,7 +86,7 @@ void AStarPathfinderObject::SearchLoop(PathfindingPacket a_packet)
   bool goalReached = false;
   while (!goalReached)
   {
-    if (!m_openList.size())
+    if (!m_openList.size() && !m_fastStack.size())
     {
       // no more nodes on open list, we did not find a path to our goal
       m_pathQueue.pop();
@@ -93,22 +96,44 @@ void AStarPathfinderObject::SearchLoop(PathfindingPacket a_packet)
 
     Node* node = m_openList[0];
 
-    // TODO -> implement fast stack
-
-    // get node with lowest F value from the open list
-    for (Node* n : m_openList)
+#ifdef USE_FASTSTACK
+    // if there is any nodes on the fast stack, use them first since they are more likely to be close to the goal
+    if (m_fastStack.size())
     {
-      if (node->f > n->f)
-        node = n;
-    }
-
-    // remove lowest f node form open list
-    for (auto it = m_openList.begin(); it != m_openList.end(); it++)
-    {
-      if (*it == node)
+      for (Node* n : m_fastStack)
       {
-        m_openList.erase(it);
-        break;
+        if (node->f > n->f)
+          node = n;
+      }
+
+      // remove lowest f node form open list
+      for (auto it = m_fastStack.begin(); it != m_fastStack.end(); it++)
+      {
+        if (*it == node)
+        {
+          m_fastStack.erase(it);
+          break;
+        }
+      }
+    }
+    else
+#endif
+    {
+      // get node with lowest F value from the open list
+      for (Node* n : m_openList)
+      {
+        if (node->f > n->f)
+          node = n;
+      }
+
+      // remove lowest f node form open list
+      for (auto it = m_openList.begin(); it != m_openList.end(); it++)
+      {
+        if (*it == node)
+        {
+          m_openList.erase(it);
+          break;
+        }
       }
     }
 
@@ -148,7 +173,13 @@ void AStarPathfinderObject::AddNeighbors(Node * a_node)
           neighbor->h = GetHueristic(neighbor);
           neighbor->f = neighbor->h + neighbor->g;
 
-          m_openList.push_back(neighbor);
+
+#ifdef USE_FASTSTACK
+          if (neighbor->f <= a_node->f)
+            m_fastStack.push_back(neighbor);
+          else
+#endif
+            m_openList.push_back(neighbor);
         }
         else // check if the path through the current node is shorter than the path already assigned to the neighbor
           RelaxPath(neighbor, a_node, g);
@@ -195,4 +226,5 @@ void AStarPathfinderObject::ClearGrid()
   //Reset all used nodes
   m_closedList.clear();
   m_openList.clear();
+  m_fastStack.clear();
 }

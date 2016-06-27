@@ -34,6 +34,7 @@ private:
   std::queue<PathfindingPacket> m_pathQueue;
 
   std::vector<Node*> m_openList;
+  std::vector<Node*> m_fastStack;
   std::vector<Node*> m_closedList;
 
   //debugging clock for path timings
