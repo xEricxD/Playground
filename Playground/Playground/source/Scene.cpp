@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "World.h"
+#include "Engine.h"
 
 Scene::Scene()
 {
@@ -30,6 +30,9 @@ void Scene::ShutDown()
 
   for (auto go : m_gameObjects)
     delete go;
+
+  // empty the collision system
+  Engine.GetCollisionSystem().ClearCollisionSystem();
 }
 
 

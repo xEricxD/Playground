@@ -1,0 +1,6 @@
+- implement basic collision
+- implement complex collisions (2D polygons) + some way to generate them from sprites
+- implement quadtrees
+- implement 2D navigation meshes
+- implement jump point search
+- implement jump point search plus

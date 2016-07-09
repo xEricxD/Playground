@@ -1,97 +1,37 @@
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:37:1
-Debug Session Length: 109.068459 seconds
-**** A star Debug Information ****
-Number of path requests: 60119
-Total time for all paths: 2653 milliseconds
-Average time per path: 44 Micro Seconds
-
-
 
 ************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:53:39
-Debug Session Length: 3.639176 seconds
+Date: 9-7-2016
+Time: 22:29:21
+Debug Session Length: 32.643089 seconds
+Running in Release
 **** A star Debug Information ****
-Number of path requests: 1
-Total time for all paths: 4 milliseconds
-Average time per path: 4378 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:53:55
-Debug Session Length: 8.402634 seconds
-**** A star Debug Information ****
-Number of path requests: 1
-Total time for all paths: 0 milliseconds
-Average time per path: 87 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:55:42
-Debug Session Length: 4.180564 seconds
-**** A star Debug Information ****
-Number of path requests: 1
-Total time for all paths: 0 milliseconds
-Average time per path: 104 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:57:51
-Debug Session Length: 8.908984 seconds
-**** A star Debug Information ****
-Number of path requests: 1
-Total time for all paths: 0 milliseconds
-Average time per path: 62 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:58:4
-Debug Session Length: 11.398695 seconds
-**** A star Debug Information ****
-Number of path requests: 1
-Total time for all paths: 0 milliseconds
-Average time per path: 165 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 20:58:29
-Debug Session Length: 13.874956 seconds
-**** A star Debug Information ****
-Number of path requests: 3
-Total time for all paths: 1 milliseconds
-Average time per path: 550 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 21:2:58
-Debug Session Length: 36.778210 seconds
-**** A star Debug Information ****
-Number of path requests: 9
-Total time for all paths: 1 milliseconds
-Average time per path: 165 Micro Seconds
-
-
-
-************************************************* New debug session ***************************************************************************
-Date: 26-6-2016
-Time: 21:47:1
-Debug Session Length: 48.027504 seconds
-**** A star Debug Information ****
-Number of path requests: 28513
-Total time for all paths: 1198 milliseconds
+Number of path requests: 20805
+Total time for all paths: 893 milliseconds
 Average time per path: 42 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 9-7-2016
+Time: 22:46:59
+Debug Session Length: 15.855012 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 2
+Total time for all paths: 0 milliseconds
+Average time per path: 37 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 9-7-2016
+Time: 23:46:54
+Debug Session Length: 19.493784 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 2770
+Total time for all paths: 186 milliseconds
+Average time per path: 67 Micro Seconds
+
+********************************************************************************************************************************************
 

@@ -1,5 +1,5 @@
 #include "AStarPathfinderObject.h"
-#include "World.h"
+#include "Engine.h"
 #include "AgentObject.h"
 #include <iostream>
 #include <fstream>
@@ -20,7 +20,7 @@ void AStarPathfinderObject::Initialise()
 
   m_gameObjectType = GameObject::GameObjectType::ASTARPATHFINDER;
 
-  std::vector<GameObject*> grid = World.GetGameObjectsByType(GameObject::GameObjectType::GRID);
+  std::vector<GameObject*> grid = Engine.GetGameObjectsByType(GameObject::GameObjectType::GRID);
   if (grid.size())
     m_grid = (GridObject*)grid[0];
 }

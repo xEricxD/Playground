@@ -1,17 +1,17 @@
-#include "World.h"
+#include "Engine.h"
 #include <iostream>
 
 int main()
 {
   // initalize the world
-  World.InitWorld();
+  Engine.InitWorld();
   
-  while (World.GetWindow().isOpen())
+  while (Engine.GetWindow().isOpen())
   {
-    World.Update();
+    Engine.Update();
   }
   
-  World.ShutDown();
+  Engine.ShutDown();
 
   printf("Exiting program..");
   return 0;

@@ -1,11 +1,12 @@
-#include "World.h"
-#include "TestScene.h"
+#include "Engine.h"
+#include "ScenesInclude.h"
+#include "AStarScene.h"
 #include <iostream>
 #include <fstream>
 
 #define GAME_SPEED 5
 
-void WorldSingleton::ShutDown()
+void EngineSingleton::ShutDown()
 {
   printf("Shutting down world..\n");
 
@@ -20,27 +21,36 @@ void WorldSingleton::ShutDown()
   std::string dateString = std::to_string(now.tm_mday) + '-' + std::to_string(now.tm_mon + 1) + '-' + std::to_string(now.tm_year + 1900);
   std::string timeString = std::to_string(now.tm_hour) + ':' + std::to_string(now.tm_min) + ':' + std::to_string(now.tm_sec);
 
-  file << "\n\n************************************************* New debug session ***************************************************************************\n";
+  file << "************************************************* New debug session ***************************************************************************\n";
   file << "Date: " << dateString << std::endl;
   file << "Time: " << timeString << std::endl;
   file << "Debug Session Length: " << std::to_string(m_clock.getElapsedTime().asSeconds()) << " seconds" << std::endl;
+#ifdef _DEBUG
+  file << "Running in Debug" << std::endl;
+#else
+  file << "Running in Release" << std::endl;
+#endif
 
   file.close();
 
   for (auto scene : m_scenes)
     delete scene;
 
+  file.open("../assets/saved/debug.txt", std::ios::app);
+  file << "********************************************************************************************************************************************\n\n";
+  file.close();
+
   printf("World shut down..\n");
 }
 
-void WorldSingleton::InitWorld()
+void EngineSingleton::InitWorld()
 {
   printf("Initializing world..\n");
 
   InitializeWindow("Playground", sf::Vector2u(1200, 800));
 
   // Add all scenes we want in the world
-  TestScene* scene1 = new TestScene();
+  AStarScene* scene1 = new AStarScene();
   m_activeScene = scene1;
   scene1->Initialise();
   m_scenes.push_back(scene1);
@@ -48,7 +58,7 @@ void WorldSingleton::InitWorld()
   printf("World initialized..\n");
 }
 
-void WorldSingleton::Update()
+void EngineSingleton::Update()
 {
   // handle any events in the window
   sf::Event event;
@@ -85,13 +95,13 @@ void WorldSingleton::Update()
   m_window.display();
 }
 
-std::vector<GameObject*> WorldSingleton::GetGameObjectsByType(GameObject::GameObjectType a_type)
+std::vector<GameObject*> EngineSingleton::GetGameObjectsByType(GameObject::GameObjectType a_type)
 {
   return m_activeScene->GetGameObjectsByType(a_type);
 }
 
 
-void WorldSingleton::InitializeWindow(sf::String a_title, sf::Vector2u a_size)
+void EngineSingleton::InitializeWindow(sf::String a_title, sf::Vector2u a_size)
 {
   m_window.create(sf::VideoMode(10, 10), "");
   m_window.setTitle(a_title);
@@ -105,7 +115,7 @@ void WorldSingleton::InitializeWindow(sf::String a_title, sf::Vector2u a_size)
   m_window.setActive();
 }
 
-void WorldSingleton::InitializeViewport(sf::Vector2f a_size)
+void EngineSingleton::InitializeViewport(sf::Vector2f a_size)
 {
   m_viewport.setSize(a_size);
   m_viewport.setCenter(sf::Vector2f(0, 0));

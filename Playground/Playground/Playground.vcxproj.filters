@@ -36,15 +36,18 @@
     <Filter Include="Header Files\Other">
       <UniqueIdentifier>{d0b3fcef-a10c-474b-b4fe-f88a2dd7cc28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Collision">
+      <UniqueIdentifier>{0f8779b9-4511-47d9-af60-dba730acd7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Collision">
+      <UniqueIdentifier>{0a73e10e-3331-43c2-b38f-4674b04523e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Camera.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
     <ClCompile Include="source\main.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
-    <ClCompile Include="source\World.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
     <ClCompile Include="source\GameobjectComponent.cpp">
@@ -83,11 +86,32 @@
     <ClCompile Include="source\GridEditorComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="source\QuadTreeObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\QuadTreeScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\BoxCollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CircleCollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AStarScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CollisionSystem.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\World.h">
-      <Filter>Header Files\World</Filter>
-    </ClInclude>
     <ClInclude Include="source\Includes.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
@@ -132,6 +156,33 @@
     </ClInclude>
     <ClInclude Include="source\GridEditorComponent.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\QuadTreeObject.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="source\QuadTreeScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\BoxCollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CircleCollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AStarScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ScenesInclude.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="source\CollisionSystem.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

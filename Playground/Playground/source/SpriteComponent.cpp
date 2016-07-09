@@ -1,5 +1,5 @@
 #include "SpriteComponent.h"
-#include "World.h"
+#include "Engine.h"
 
 SpriteComponent::SpriteComponent()
 {
@@ -28,7 +28,7 @@ void SpriteComponent::Update(float a_dt)
   // render the sprite
   // use worlds active camera for transformations
   glm::mat4 modelMatrix = m_transform->GetTransformationMatrix() * GetOwner()->GetTransform()->GetTransformationMatrix();
-  glm::mat4 viewMatrix = modelMatrix * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
   
   // get the position from the matrix, and use it to draw the sprite
   glm::vec3 pos(viewMatrix[3]);
@@ -42,7 +42,7 @@ void SpriteComponent::Update(float a_dt)
   glm::vec3 rotation = GetOwner()->GetTransform()->GetRotation() + m_transform->GetRotation();
   m_sprite.setRotation(rotation.z);
   
-  World.GetWindow().draw(m_sprite);
+  Engine.GetWindow().draw(m_sprite);
 }
 
 void SpriteComponent::LoadTextureFromFile(sf::String a_path)

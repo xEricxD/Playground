@@ -21,7 +21,12 @@
   <ItemGroup>
     <ClCompile Include="source\AgentObject.cpp" />
     <ClCompile Include="source\AStarPathfinderObject.cpp" />
+    <ClCompile Include="source\AStarScene.cpp" />
+    <ClCompile Include="source\BoxCollisionComponent.cpp" />
     <ClCompile Include="source\Camera.cpp" />
+    <ClCompile Include="source\CircleCollisionComponent.cpp" />
+    <ClCompile Include="source\CollisionComponent.cpp" />
+    <ClCompile Include="source\CollisionSystem.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GameobjectComponent.cpp" />
     <ClCompile Include="source\GridEditorComponent.cpp" />
@@ -29,16 +34,23 @@
     <ClCompile Include="source\GridObject.cpp" />
     <ClCompile Include="source\GridSavingComponent.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\QuadTreeObject.cpp" />
+    <ClCompile Include="source\QuadTreeScene.cpp" />
     <ClCompile Include="source\Scene.cpp" />
     <ClCompile Include="source\SpriteComponent.cpp" />
     <ClCompile Include="source\TestScene.cpp" />
     <ClCompile Include="source\TransformComponent.cpp" />
-    <ClCompile Include="source\World.cpp" />
+    <ClCompile Include="source\Engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\AgentObject.h" />
     <ClInclude Include="source\AStarPathfinderObject.h" />
+    <ClInclude Include="source\AStarScene.h" />
+    <ClInclude Include="source\BoxCollisionComponent.h" />
     <ClInclude Include="source\Camera.h" />
+    <ClInclude Include="source\CircleCollisionComponent.h" />
+    <ClInclude Include="source\CollisionComponent.h" />
+    <ClInclude Include="source\CollisionSystem.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameobjectComponent.h" />
     <ClInclude Include="source\GridEditorComponent.h" />
@@ -47,11 +59,14 @@
     <ClInclude Include="source\GridSavingComponent.h" />
     <ClInclude Include="source\Includes.h" />
     <ClInclude Include="source\PathfindingStructs.h" />
+    <ClInclude Include="source\QuadTreeObject.h" />
+    <ClInclude Include="source\QuadTreeScene.h" />
     <ClInclude Include="source\Scene.h" />
+    <ClInclude Include="source\ScenesInclude.h" />
     <ClInclude Include="source\SpriteComponent.h" />
     <ClInclude Include="source\TestScene.h" />
     <ClInclude Include="source\TransformComponent.h" />
-    <ClInclude Include="source\World.h" />
+    <ClInclude Include="source\Engine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C989F35-2BD3-4EE8-8967-91818E933222}</ProjectGuid>

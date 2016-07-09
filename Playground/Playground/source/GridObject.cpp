@@ -1,5 +1,5 @@
 #include "GridObject.h"
-#include "World.h"
+#include "Engine.h"
 #include "GridSavingComponent.h"
 #include "GridEditorComponent.h"
 
@@ -49,10 +49,10 @@ void GridObject::Update(float a_dt)
   {
     if (!node.available)
     {
-      glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+      glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
       glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
       m_sprite.setPosition(sf::Vector2f(node.position.x + drawPosition.x, node.position.y + drawPosition.y));
-      World.GetWindow().draw(m_sprite);
+      Engine.GetWindow().draw(m_sprite);
     }
   }
 
@@ -264,7 +264,7 @@ void GridObject::ClearGrid()
 void GridObject::DrawDebugGrid()
 {
   // get the view matrix to get the correct draw position
-  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
   if (m_drawSimple)
@@ -283,7 +283,7 @@ void GridObject::DrawDebugGrid()
         sf::Vertex(sf::Vector2f(xStart, yStart + (m_size.y * m_nodeSize.y)))
       };
 
-      World.GetWindow().draw(line, 2, sf::Lines);
+      Engine.GetWindow().draw(line, 2, sf::Lines);
     }
 
     // draw y lines
@@ -297,7 +297,7 @@ void GridObject::DrawDebugGrid()
         sf::Vertex(sf::Vector2f(xStart + (m_size.x * m_nodeSize.x), yStart))
       };
 
-      World.GetWindow().draw(line, 2, sf::Lines);
+      Engine.GetWindow().draw(line, 2, sf::Lines);
     }
   }
   else
@@ -317,7 +317,7 @@ void GridObject::DrawDebugGrid()
       else
         box.setOutlineColor(sf::Color::Red);
 
-      World.GetWindow().draw(box);
+      Engine.GetWindow().draw(box);
     }
   }
 }

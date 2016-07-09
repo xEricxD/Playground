@@ -1,6 +1,6 @@
 #include "GridNavigationComponent.h"
 #include "AStarPathfinderObject.h"
-#include "World.h"
+#include "Engine.h"
 
 GridNavigationComponent::GridNavigationComponent() : m_activePath(nullptr), m_pathfinder(nullptr), m_wander(false)
 {
@@ -17,7 +17,7 @@ void GridNavigationComponent::Initialise()
   m_componentType = GameobjectComponent::ComponentType::GRIDNAVIGATION;
 
   // find the pathfinder in our active scene
-  std::vector<GameObject*> pathfinder = World.GetGameObjectsByType(GameObject::GameObjectType::ASTARPATHFINDER);
+  std::vector<GameObject*> pathfinder = Engine.GetGameObjectsByType(GameObject::GameObjectType::ASTARPATHFINDER);
   if (!pathfinder.empty())
     m_pathfinder = (AStarPathfinderObject*)pathfinder[0];
 }
@@ -105,7 +105,7 @@ void GridNavigationComponent::DrawDebug()
   if (!m_drawDebug || !m_activePath)
     return;
 
-  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
   for (unsigned int i = 0; i < m_activePath->path.size() - 1; i++)
@@ -119,6 +119,6 @@ void GridNavigationComponent::DrawDebug()
       sf::Vertex(sf::Vector2f(pos2.x, pos2.y))
     };
 
-    World.GetWindow().draw(line, 2, sf::Lines);
+    Engine.GetWindow().draw(line, 2, sf::Lines);
   }
 }
