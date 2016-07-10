@@ -1,20 +1,20 @@
 #include "TransformComponent.h"
 
-TransformComponent::TransformComponent()
+TransformComponent::TransformComponent() : m_changed(true)
 {
-  m_position = glm::vec3(0, 0, 0);
-  m_transform = glm::mat4(1, 0, 0, 0, 
-                          0, 1, 0, 0, 
-                          0, 0, 1, 0, 
-                          m_position.x, m_position.y, m_position.z, 1);
-
+  m_position = glm::vec3(0, 0, 0); 
   m_scale = glm::vec3(1, 1, 1);
-  m_scalingMatrix = glm::mat4(m_scale.x, 0, 0, 0, 
-                              0, m_scale.y, 0, 0, 
+  m_rotation = glm::vec3(0, 0, 0);
+
+  m_transform = glm::mat4(1, 0, 0, 0,
+                          0, 1, 0, 0,
+                          0, 0, 1, 0,
+                          m_position.x, m_position.y, m_position.z, 1);
+  
+  m_scalingMatrix = glm::mat4(m_scale.x, 0, 0, 0,
+                              0, m_scale.y, 0, 0,
                               0, 0, m_scale.z, 0,
                               0, 0, 0, 1);
-
-  m_rotation = glm::vec3(0, 0, 0);
 }
 
 TransformComponent::~TransformComponent()
@@ -28,6 +28,8 @@ void TransformComponent::SetPosition(glm::vec3 a_position)
                           0, 1, 0, 0, 
                           0, 0, 1, 0, 
                           m_position.x, m_position.y, m_position.z, 1);
+
+  m_changed = true;
 }
 
 void TransformComponent::Translate(glm::vec3 a_position)
@@ -37,6 +39,7 @@ void TransformComponent::Translate(glm::vec3 a_position)
                           0, 1, 0, 0, 
                           0, 0, 1, 0, 
                           m_position.x, m_position.y, m_position.z, 1);
+  m_changed = true;
 }
 
 void TransformComponent::SetScale(glm::vec3 a_scale)
@@ -46,6 +49,7 @@ void TransformComponent::SetScale(glm::vec3 a_scale)
                               0, m_scale.y, 0, 0, 
                               0, 0, m_scale.z, 0, 
                               0, 0, 0, 1);
+  m_changed = true;
 }
 
 void TransformComponent::Scale(glm::vec3 a_scale)
@@ -55,6 +59,7 @@ void TransformComponent::Scale(glm::vec3 a_scale)
                               0, m_scale.y, 0, 0, 
                               0, 0, m_scale.z, 0, 
                               0, 0, 0, 1);
+  m_changed = true;
 }
 
 void TransformComponent::SetRotation(glm::vec3 a_rotation)
@@ -91,4 +96,6 @@ void TransformComponent::UpdateRotation()
                             0, 0, 0, 1);
 
   m_rotationMatrix = (rmz * rmy * rmx);
+
+  m_changed = true;
 }

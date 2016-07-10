@@ -33,7 +33,9 @@ void AStarPathfinderObject::ShutDown()
   file << "**** A star Debug Information ****\n";
   file << "Number of path requests: " << std::to_string(m_numPathRequests) << "\n";
   file << "Total time for all paths: " << std::to_string(m_pathTime / 1000) << " milliseconds\n";
-  file << "Average time per path: " << std::to_string(m_pathTime / m_numPathRequests) << " Micro Seconds\n\n";
+  
+  sf::Uint64 averagePathTime = (m_numPathRequests > 0) ? m_pathTime / m_numPathRequests : 0;
+  file << "Average time per path: " << std::to_string(averagePathTime) << " Micro Seconds\n\n";
 
   file.close();
 }

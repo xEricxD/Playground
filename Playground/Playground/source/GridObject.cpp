@@ -27,8 +27,8 @@ void GridObject::Initialise()
 
   GenerateGrid();
 
-  GridSavingComponent* savingComp = new GridSavingComponent(true, false);
-  AddComponent(savingComp);
+  m_savingComp = new GridSavingComponent(false, false);
+  AddComponent(m_savingComp);
 
   GridEditorComponent* editorComp = new GridEditorComponent(false);
   AddComponent(editorComp);
@@ -179,6 +179,11 @@ void GridObject::UpdateNodeAvailability(Node* a_node)
       FindNeighbors(*neighbor);
     }
   }
+}
+
+void GridObject::LoadGridFromFile()
+{
+  m_savingComp->LoadGridData();
 }
 
 glm::vec2 GridObject::GetRandomPositionOnGrid()

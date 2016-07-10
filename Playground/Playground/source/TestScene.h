@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 
+class AgentObject;
+
 class TestScene : public Scene
 {
 public:
@@ -12,6 +14,6 @@ public:
   virtual void ShutDown() override;
 
 private:
-
+  AgentObject* m_agent;
 };
 

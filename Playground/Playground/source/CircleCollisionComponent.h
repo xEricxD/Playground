@@ -4,7 +4,7 @@
 class CircleCollisionComponent : public CollisionComponent
 {
 public:
-  CircleCollisionComponent();
+  CircleCollisionComponent(float a_radius = 20);
   virtual ~CircleCollisionComponent() override;
 
   virtual void Initialise() override;
@@ -13,6 +13,9 @@ public:
 
   // Generate an AABB collision for the broad phase collision check
   virtual void GenerateAABB() override;
+
+protected:
+  virtual void AddVertices() override;
 
 private:
   float m_radius;

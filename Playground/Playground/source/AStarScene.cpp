@@ -25,6 +25,7 @@ void AStarScene::Initialise()
   GridObject* grid = new GridObject(glm::vec2(64, 64), glm::vec2(-32, -32), glm::vec2(64, 64));
   AddGameobject(grid);
   grid->SetDrawDebug(true, true);
+  grid->LoadGridFromFile();
 
   AStarPathfinderObject* pathfinder = new AStarPathfinderObject();
   AddGameobject(pathfinder);
@@ -50,12 +51,12 @@ void AStarScene::Update(float a_dt)
 #ifdef USE_DEBUG_AGENT
   if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
   {
-    glm::mat4 viewMatrix = glm::inverse(World.GetCamera().GetTransform().GetTransformationMatrix());
+    glm::mat4 viewMatrix = glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
     glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
                                            // use (mouse pos - half screen pos) to help convert to world space
-    sf::Vector2i mouse = sf::Mouse::getPosition(World.GetWindow());
-    sf::Vector2i halfscreen = sf::Vector2i((int)(World.GetWindow().getSize().x * 0.5f), (int)(World.GetWindow().getSize().y * 0.5f));
+    sf::Vector2i mouse = sf::Mouse::getPosition(Engine.GetWindow());
+    sf::Vector2i halfscreen = sf::Vector2i((int)(Engine.GetWindow().getSize().x * 0.5f), (int)(Engine.GetWindow().getSize().y * 0.5f));
 
     sf::Vector2i pos = mouse - halfscreen - sf::Vector2i((int)drawPosition.x, (int)drawPosition.y);
     m_agent->MoveToLocation(glm::vec2(pos.x, pos.y));

@@ -1,6 +1,7 @@
 #pragma once
 #include "Includes.h"
 
+// TODO - add parent transform support
 class TransformComponent
 {
 public:
@@ -23,8 +24,15 @@ public:
   const glm::mat4 &GetScaleMatrix() { return m_scalingMatrix; }
   const glm::mat4 &GetRotationMatrix() { return m_rotationMatrix; }
 
+  bool HasChanged() { return m_changed; }
+  // since the transform doesnt have it's own update, we want to resest this bool from the physics system
+  void ResetChanged() { m_changed = false; }
+
 private:
   void UpdateRotation(); //call when a rotate or setrotation is called
+  
+  // store if the transform has been updated
+  bool m_changed;
 
   glm::mat4 m_transform;
   glm::mat4 m_scalingMatrix;

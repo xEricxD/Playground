@@ -3,6 +3,8 @@
 #include <map>
 #include <SFML/Graphics.hpp>
 
+class GridSavingComponent;
+
 enum ListStatus
 {
   NONE = 0,
@@ -61,6 +63,8 @@ public:
   void UpdateAllNeighbors();
   void UpdateNodeAvailability(Node* a_node);
 
+  void LoadGridFromFile();
+
   glm::vec2 GetRandomPositionOnGrid();
 
 private:
@@ -80,5 +84,8 @@ private:
 
   bool m_drawDebug;
   bool m_drawSimple;
+
+  // saving / loading
+  GridSavingComponent* m_savingComp;
 };
 

@@ -36,6 +36,8 @@ void EngineSingleton::ShutDown()
   for (auto scene : m_scenes)
     delete scene;
 
+  m_collisionSystem.ShutDown();
+
   file.open("../assets/saved/debug.txt", std::ios::app);
   file << "********************************************************************************************************************************************\n\n";
   file.close();
@@ -50,7 +52,7 @@ void EngineSingleton::InitWorld()
   InitializeWindow("Playground", sf::Vector2u(1200, 800));
 
   // Add all scenes we want in the world
-  AStarScene* scene1 = new AStarScene();
+  TestScene* scene1 = new TestScene();
   m_activeScene = scene1;
   scene1->Initialise();
   m_scenes.push_back(scene1);
@@ -90,6 +92,7 @@ void EngineSingleton::Update()
   // update the camera and active scene
   m_mainCamera.Update(m_dt);
   m_activeScene->Update(m_dt * GAME_SPEED);
+  m_collisionSystem.UpdateCollisionSystem();
 
   // display everything to the screen
   m_window.display();

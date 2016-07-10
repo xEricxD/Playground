@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <SFML\Graphics.hpp>
 #include "CollisionComponent.h"
 
 // TODO - add continious collision detection instead of just discrete
@@ -11,6 +11,8 @@ class CollisionSystem
 public:
   CollisionSystem();
   ~CollisionSystem();
+
+  void ShutDown();
 
   // Check for collision in the world
   void UpdateCollisionSystem();
@@ -34,8 +36,20 @@ private:
   // Perform all collision resolves
   void ResolveCollisions();
 
+  // Perform simple AABB collision check
+  inline bool TestCollisionAABB(AABB* A, AABB* B);
+
   std::vector<CollisionComponent*> m_colliders; // Vector with all active colliders
   std::vector < std::pair<CollisionComponent*, CollisionComponent*> > m_broadPhaseCollision; // store the broad phase results in pairs
   std::vector < std::pair<CollisionComponent*, CollisionComponent*> > m_narrowPhaseCollision; // store the narrow phase results in pairs
+
+  // Debug variables
+  sf::Clock m_clock;
+  sf::Int64 m_AABBGenerationTime;
+  sf::Int64 m_treeGenerationTime;
+  sf::Int64 m_broadPhaseTime;
+  sf::Int64 m_narrowPhaseTime;
+  sf::Int64 m_collisionResolveTime;
+  sf::Int64 m_numUpdates;
 };
 
