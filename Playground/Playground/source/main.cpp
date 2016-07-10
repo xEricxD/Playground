@@ -4,7 +4,7 @@
 int main()
 {
   // initalize the world
-  Engine.InitWorld();
+  Engine.InitEngine();
   
   while (Engine.GetWindow().isOpen())
   {

@@ -27,6 +27,7 @@
     <ClCompile Include="source\CircleCollisionComponent.cpp" />
     <ClCompile Include="source\CollisionComponent.cpp" />
     <ClCompile Include="source\CollisionSystem.cpp" />
+    <ClCompile Include="source\ConvexCollisionComponent.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GameobjectComponent.cpp" />
     <ClCompile Include="source\GridEditorComponent.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="source\CircleCollisionComponent.h" />
     <ClInclude Include="source\CollisionComponent.h" />
     <ClInclude Include="source\CollisionSystem.h" />
+    <ClInclude Include="source\ConvexCollisionComponent.h" />
     <ClInclude Include="source\GameObject.h" />
     <ClInclude Include="source\GameobjectComponent.h" />
     <ClInclude Include="source\GridEditorComponent.h" />

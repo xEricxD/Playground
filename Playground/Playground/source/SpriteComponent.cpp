@@ -35,7 +35,7 @@ void SpriteComponent::Update(float a_dt)
   m_sprite.setPosition(sf::Vector2f(pos.x, pos.y));
 
   // update the scale
-  glm::vec3 scale = GetOwner()->GetTransform()->GetScale() * m_transform->GetScale();
+  glm::vec3 scale = m_transform->GetScale();
   m_sprite.setScale(sf::Vector2f(scale.x, scale.y));
 
   // update rotation

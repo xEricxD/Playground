@@ -1,4 +1,6 @@
 #include "CollisionSystem.h"
+#include "CircleCollisionComponent.h"
+#include "ConvexCollisionComponent.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -9,6 +11,11 @@ CollisionSystem::CollisionSystem()
 
 CollisionSystem::~CollisionSystem()
 {
+}
+
+void CollisionSystem::Initialise()
+{
+  BuildCollisionMap();
 }
 
 void CollisionSystem::ShutDown()
@@ -80,7 +87,7 @@ void CollisionSystem::PerformBroadPhaseCollisionCheck()
   m_clock.restart();
 
   // TODO - once we have a partitioning tree, replace this N^2 loop
-  for (unsigned int i = 0; i < m_colliders.size() - 1; i++)
+  for (unsigned int i = 0; i < m_colliders.size(); i++)
   {
     for (unsigned int j = i + 1; j < m_colliders.size(); j++)
     {
@@ -104,11 +111,22 @@ void CollisionSystem::PerformNarrowPhaseCollisionCheck()
 {
   m_clock.restart();
 
+  // use seperating axis theorem to check for collision
   for (auto collision : m_broadPhaseCollision)
   {
-
+    std::pair<CollisionComponent::ColliderType, CollisionComponent::ColliderType> pair(collision.first->GetColliderType(), collision.second->GetColliderType());
+    if (m_collisionMap.find(pair) != m_collisionMap.end())
+    {
+      // this is a special case, so call the corresponding function
+      if ((this->*m_collisionMap[pair])(collision.first, collision.second))
+        m_narrowPhaseCollision.push_back(collision);
+    }
+    else
+    {
+      if (CheckConvexCollisions(collision.first, collision.second))
+        m_narrowPhaseCollision.push_back(collision);
+    }
   }
-
   m_broadPhaseCollision.clear();
 
   m_narrowPhaseTime += m_clock.getElapsedTime().asMicroseconds();
@@ -118,8 +136,31 @@ void CollisionSystem::ResolveCollisions()
 {
   m_clock.restart();
 
+  for (auto collision : m_narrowPhaseCollision)
+  {
+
+  }
+  m_narrowPhaseCollision.clear();
 
   m_collisionResolveTime += m_clock.getElapsedTime().asMicroseconds();
+}
+
+inline void CollisionSystem::BuildCollisionMap()
+{
+  std::pair<CollisionComponent::ColliderType, CollisionComponent::ColliderType> pair(CollisionComponent::ColliderType::CIRCLE, CollisionComponent::ColliderType::CIRCLE);
+  m_collisionMap[pair] = &CollisionSystem::CheckCircleCircleCollision;
+
+  pair.first = CollisionComponent::ColliderType::BOX, pair.second = CollisionComponent::ColliderType::CIRCLE;
+  m_collisionMap[pair] = &CollisionSystem::CheckBoxCircleCollision;
+
+  pair.first = CollisionComponent::ColliderType::CIRCLE, pair.second = CollisionComponent::ColliderType::BOX;
+  m_collisionMap[pair] = &CollisionSystem::CheckCircleBoxCollision;
+
+  pair.first = CollisionComponent::ColliderType::CIRCLE, pair.second = CollisionComponent::ColliderType::CONVEX;
+  m_collisionMap[pair] = &CollisionSystem::CheckCircleConvexCollision;
+
+  pair.first = CollisionComponent::ColliderType::CONVEX, pair.second = CollisionComponent::ColliderType::CIRCLE;
+  m_collisionMap[pair] = &CollisionSystem::CheckConvexCircleCollision;
 }
 
 inline bool CollisionSystem::TestCollisionAABB(AABB* A, AABB* B)
@@ -132,4 +173,47 @@ inline bool CollisionSystem::TestCollisionAABB(AABB* A, AABB* B)
     return false;
 
   return true;
+}
+
+bool CollisionSystem::CheckCircleCircleCollision(CollisionComponent* A, CollisionComponent* B)
+{
+  CircleCollisionComponent* c1 = (CircleCollisionComponent*)A;
+  CircleCollisionComponent* c2 = (CircleCollisionComponent*)B;
+
+  float dx = c1->GetTransform()->GetPosition().x - c2->GetTransform()->GetPosition().x;
+  float dy = c1->GetTransform()->GetPosition().y - c2->GetTransform()->GetPosition().y;
+  float distanceSq = dx * dx + dy * dy;
+  float radiusSq = (c1->GetRadius() + c2->GetRadius()) *  (c1->GetRadius() + c2->GetRadius());
+  // if the distance is shorter the the radii, the circles are colliding
+  return distanceSq <= radiusSq;
+}
+
+bool CollisionSystem::CheckBoxCircleCollision(CollisionComponent* A, CollisionComponent* B)
+{
+  return CheckCircleBoxCollision(B, A);
+}
+
+bool CollisionSystem::CheckCircleBoxCollision(CollisionComponent* A, CollisionComponent* B)
+{
+  return CheckCircleConvexCollision(B, A);
+}
+
+bool CollisionSystem::CheckConvexCircleCollision(CollisionComponent * A, CollisionComponent * B)
+{
+  return CheckCircleConvexCollision(B, A);
+}
+
+bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent * A, CollisionComponent * B)
+{
+  CircleCollisionComponent* c1 = (CircleCollisionComponent*)A;
+  ConvexCollisionComponent* c2 = (ConvexCollisionComponent*)B;
+
+  return false;
+}
+
+bool CollisionSystem::CheckConvexCollisions(CollisionComponent * A, CollisionComponent * B)
+{
+
+
+  return false;
 }

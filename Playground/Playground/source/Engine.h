@@ -2,9 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Scene.h"
 #include "Camera.h"
-#include "CollisionSystem.h"
 
 // TODO - add functionality for scene switching (via GUI or button presses?)
+class CollisionSystem;
 
 class EngineSingleton
 {
@@ -17,7 +17,7 @@ public:
 
   void ShutDown();
 
-  void InitWorld();
+  void InitEngine();
 
   void InitializeWindow(sf::String a_title, sf::Vector2u a_size = sf::Vector2u(800, 600));
 
@@ -32,7 +32,7 @@ public:
   float GetWorldDeltaTime() { return m_dt; }
 
   Camera &GetCamera() { return m_mainCamera; }
-  CollisionSystem &GetCollisionSystem() { return m_collisionSystem; }
+  CollisionSystem* GetCollisionSystem() { return m_collisionSystem; }
 
 private:
   EngineSingleton() {}
@@ -49,7 +49,7 @@ private:
   sf::View m_viewport;
 
   Camera m_mainCamera;
-  CollisionSystem m_collisionSystem;
+  CollisionSystem* m_collisionSystem;
 
   sf::Clock m_clock;
   float m_lastFrameTime;

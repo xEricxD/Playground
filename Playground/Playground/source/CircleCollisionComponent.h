@@ -14,10 +14,12 @@ public:
   // Generate an AABB collision for the broad phase collision check
   virtual void GenerateAABB() override;
 
-protected:
-  virtual void AddVertices() override;
+  void SetRadius(float a_radius) { m_radius = a_radius; }
+  float GetRadius() { return m_radius; }
 
 private:
+  virtual void DrawDebug() override;
+
   float m_radius;
 };
 

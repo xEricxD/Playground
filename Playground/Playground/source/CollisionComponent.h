@@ -12,6 +12,14 @@ struct AABB
 class CollisionComponent : public GameobjectComponent
 {
 public:
+  enum ColliderType
+  {
+    CIRCLE = 0,
+    BOX,
+    CONVEX,
+    CONCAVE
+  };
+
   CollisionComponent();
   virtual ~CollisionComponent() override;
 
@@ -23,6 +31,7 @@ public:
   virtual void GenerateAABB();
 
   AABB* GetAABB() { return &m_AABB; }
+  ColliderType GetColliderType() { return m_type; }
 
   void SetDrawDebug(bool a_value) { m_drawDebug = a_value; }
 
@@ -30,17 +39,18 @@ protected:
   // for concave shapes
   void GenerateConvexHull();
   // Add all the vertices of the object to the vertex array
-  virtual void AddVertices() = 0;
+  virtual void AddVertices() {}
+  virtual void DrawDebug();
 
   // store the objects AABB
   AABB m_AABB;
+  ColliderType m_type;
   // all vertices of the collider, in vertex space
   std::vector<glm::vec2> m_vertices;
   // if this object hasn't moved, we do not need to test for collision against other sleeping objects, since none of them moved
   bool m_isSleeping;
 
 private:
-  void DrawDebug();
   bool m_drawDebug;
 
   inline glm::vec2 ConvertVertexToViewSpace(glm::vec2 a_vertex);

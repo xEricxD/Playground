@@ -3,6 +3,7 @@
 #include "AgentObject.h"
 #include "GridObject.h"
 #include "AStarPathfinderObject.h"
+#include "ConvexCollisionComponent.h"
 #include "CircleCollisionComponent.h"
 
 #define CHARACTER_SPEED 20
@@ -37,7 +38,7 @@ void TestScene::Initialise()
 
   AgentObject* agent = new AgentObject();
   AddGameobject(agent);
-  agent->GetTransform()->SetPosition(glm::vec3(200, 0, 0)); 
+  agent->GetTransform()->SetLocalPosition(glm::vec3(200, 0, 0)); 
   collider = new CircleCollisionComponent();
   agent->AddComponent(collider);
   collider->SetDrawDebug(true);

@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Engine.h"
+#include "CollisionSystem.h"
 
 Scene::Scene()
 {
@@ -32,7 +33,7 @@ void Scene::ShutDown()
     delete go;
 
   // empty the collision system
-  Engine.GetCollisionSystem().ClearCollisionSystem();
+  Engine.GetCollisionSystem()->ClearCollisionSystem();
 }
 
 

@@ -1,5 +1,6 @@
 #include "CollisionComponent.h"
 #include "Engine.h"
+#include "CollisionSystem.h"
 #include <SFML/Graphics.hpp>
 
 CollisionComponent::CollisionComponent()
@@ -14,7 +15,7 @@ void CollisionComponent::Initialise()
 {
   GameobjectComponent::Initialise();
 
-  Engine.GetCollisionSystem().AddCollider(this);
+  Engine.GetCollisionSystem()->AddCollider(this);
   AddVertices();
   GenerateAABB();
   GetTransform()->ResetChanged();
@@ -55,7 +56,7 @@ void CollisionComponent::DrawDebug()
   box.setFillColor(sf::Color::Transparent);
   box.setOutlineThickness(1.f);
   box.setOutlineColor(sf::Color::White);
-  box.setPosition(sf::Vector2f(m_transform->GetPosition().x + drawPosition.x, m_transform->GetPosition().y + drawPosition.y));
+  box.setPosition(sf::Vector2f(drawPosition.x, drawPosition.y));
 
   Engine.GetWindow().draw(box);
 

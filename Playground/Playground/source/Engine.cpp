@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "ScenesInclude.h"
 #include "AStarScene.h"
+#include "CollisionSystem.h"
 #include <iostream>
 #include <fstream>
 
@@ -36,7 +37,8 @@ void EngineSingleton::ShutDown()
   for (auto scene : m_scenes)
     delete scene;
 
-  m_collisionSystem.ShutDown();
+  m_collisionSystem->ShutDown();
+  delete m_collisionSystem;
 
   file.open("../assets/saved/debug.txt", std::ios::app);
   file << "********************************************************************************************************************************************\n\n";
@@ -45,11 +47,14 @@ void EngineSingleton::ShutDown()
   printf("World shut down..\n");
 }
 
-void EngineSingleton::InitWorld()
+void EngineSingleton::InitEngine()
 {
   printf("Initializing world..\n");
 
   InitializeWindow("Playground", sf::Vector2u(1200, 800));
+  // initialise world systems
+  m_collisionSystem = new CollisionSystem();
+  m_collisionSystem->Initialise();
 
   // Add all scenes we want in the world
   TestScene* scene1 = new TestScene();
@@ -92,7 +97,7 @@ void EngineSingleton::Update()
   // update the camera and active scene
   m_mainCamera.Update(m_dt);
   m_activeScene->Update(m_dt * GAME_SPEED);
-  m_collisionSystem.UpdateCollisionSystem();
+  m_collisionSystem->UpdateCollisionSystem();
 
   // display everything to the screen
   m_window.display();

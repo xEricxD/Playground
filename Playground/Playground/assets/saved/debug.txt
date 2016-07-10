@@ -124,3 +124,291 @@ Average time for collision resolves: 1 Micro Seconds
 
 ********************************************************************************************************************************************
 
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:30:45
+Debug Session Length: 7.839499 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 1484
+Total time for all paths: 56 milliseconds
+Average time per path: 37 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 3350
+Total time for all updates: 28 milliseconds
+Average time per update: 8 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 2 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:31:14
+Debug Session Length: 14.726088 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 6
+Total time for all paths: 0 milliseconds
+Average time per path: 20 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 40057
+Total time for all updates: 260 milliseconds
+Average time per update: 6 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 1 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:31:39
+Debug Session Length: 2.783459 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 1
+Total time for all paths: 0 milliseconds
+Average time per path: 19 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 5410
+Total time for all updates: 41 milliseconds
+Average time per update: 7 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 2 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:32:36
+Debug Session Length: 13.614110 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 4
+Total time for all paths: 9 milliseconds
+Average time per path: 2300 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 1525
+Total time for all updates: 29 milliseconds
+Average time per update: 19 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 7 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 2 Micro Seconds
+Average time for narrow phase collision check: 7 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:34:18
+Debug Session Length: 9.267547 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 24967
+Total time for all updates: 179 milliseconds
+Average time per update: 7 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 1 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:42:38
+Debug Session Length: 4.919375 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 13134
+Total time for all updates: 93 milliseconds
+Average time per update: 7 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 1 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:44:1
+Debug Session Length: 5.329161 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 1964
+Total time for all updates: 39 milliseconds
+Average time per update: 20 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 7 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 3 Micro Seconds
+Average time for narrow phase collision check: 3 Micro Seconds
+Average time for collision resolves: 3 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:47:12
+Debug Session Length: 3.538001 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 992
+Total time for all updates: 26 milliseconds
+Average time per update: 27 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 13 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 3 Micro Seconds
+Average time for narrow phase collision check: 4 Micro Seconds
+Average time for collision resolves: 4 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:48:11
+Debug Session Length: 4.002781 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 1283
+Total time for all updates: 31 milliseconds
+Average time per update: 24 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 10 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 5 Micro Seconds
+Average time for narrow phase collision check: 3 Micro Seconds
+Average time for collision resolves: 3 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:48:22
+Debug Session Length: 1.953494 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 445
+Total time for all updates: 13 milliseconds
+Average time per update: 29 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 9 Micro Seconds
+Average time for partitioning tree generation: 2 Micro Seconds
+Average time for broad phase collision check: 3 Micro Seconds
+Average time for narrow phase collision check: 6 Micro Seconds
+Average time for collision resolves: 7 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:48:42
+Debug Session Length: 9.347178 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 3602
+Total time for all updates: 83 milliseconds
+Average time per update: 23 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 10 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 3 Micro Seconds
+Average time for narrow phase collision check: 4 Micro Seconds
+Average time for collision resolves: 3 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 10-7-2016
+Time: 21:58:0
+Debug Session Length: 36.000923 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 7179
+Total time for all updates: 15036 milliseconds
+Average time per update: 2094 Micro Seconds
+
+Average time per system: 
+Average time for AABB generation: 8 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 5 Micro Seconds
+Average time for narrow phase collision check: 2075 Micro Seconds
+Average time for collision resolves: 3 Micro Seconds
+
+********************************************************************************************************************************************
+

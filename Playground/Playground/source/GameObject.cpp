@@ -46,6 +46,8 @@ void GameObject::AddComponent(GameobjectComponent * a_component)
   if (!a_component->HasBeenInitialised())
     a_component->Initialise();
 
+  a_component->GetTransform()->SetParent(GetTransform());
+
   m_components.push_back(a_component);
 }
 

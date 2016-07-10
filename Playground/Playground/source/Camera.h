@@ -17,9 +17,9 @@ public:
   void Translate(glm::vec3 a_pos); //move in local space
 
   TransformComponent &GetTransform() { return m_transform; }
-  glm::vec3 &GetPosition() { return m_transform.GetPosition(); }
-  glm::vec3 &GetRight() { return m_right; }
-  glm::vec3 &GetUp() { return m_up; }
+  const glm::vec3 &GetPosition() { return m_transform.GetPosition(); }
+  const glm::vec3 &GetRight() { return m_right; }
+  const glm::vec3 &GetUp() { return m_up; }
   
 private:
   TransformComponent m_transform;

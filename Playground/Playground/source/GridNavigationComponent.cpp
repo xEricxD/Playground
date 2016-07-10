@@ -77,7 +77,7 @@ void GridNavigationComponent::RequestPath(glm::vec2 a_goalPosition, bool a_stopC
     return;
 
   //request a path from the pathfinder
-  m_pathfinder->RequestPath(GetOwner(), glm::vec2(GetOwner()->GetTransform()->GetPosition()), a_goalPosition);
+  m_pathfinder->RequestPath(GetOwner(), glm::vec2(GetTransform()->GetPosition()), a_goalPosition);
   // stop the current navigation if there is any
   if (m_activePath)
   {

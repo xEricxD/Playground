@@ -6,7 +6,7 @@
 #include "Engine.h"
 
 #define NUM_AGENTS 1000
-//#define USE_DEBUG_AGENT
+#define USE_DEBUG_AGENT
 
 AStarScene::AStarScene()
 {
