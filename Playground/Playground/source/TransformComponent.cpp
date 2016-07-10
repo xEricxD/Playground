@@ -117,6 +117,16 @@ const glm::vec3 TransformComponent::GetScale(CoordinateSpace a_space)
     return m_parent->GetScale(a_space) * m_scale;
 }
 
+bool TransformComponent::HasChanged()
+{
+  if (m_changed)
+    return true;
+  else if (m_parent)
+    return m_parent->HasChanged();
+  else
+    return false;
+}
+
 void TransformComponent::UpdateRotation()
 {
   //calculate rotation for each axis

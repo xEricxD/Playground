@@ -5,7 +5,13 @@
 #include <fstream>
 #include <string>
 
-CollisionSystem::CollisionSystem()
+// Sources: 
+// http://www.dyn4j.org/2010/01/sat/#sat-convex
+// http://www.sevenson.com.au/actionscript/sat/
+// https://www.toptal.com/game/video-game-physics-part-ii-collision-detection-for-solid-objects
+
+CollisionSystem::CollisionSystem() : m_colliderUpdateTime(0), m_AABBGenerationTime(0), m_treeGenerationTime(0)
+, m_broadPhaseTime(0), m_narrowPhaseTime(0), m_collisionResolveTime(0), m_numUpdates(0)
 {
 }
 
@@ -25,11 +31,12 @@ void CollisionSystem::ShutDown()
 
   file << "**** Collision system Debug Information ****\n";
   file << "Number of Updates: " << std::to_string(m_numUpdates) << "\n";
-  sf::Uint64 time = m_AABBGenerationTime + m_treeGenerationTime + m_broadPhaseTime + m_narrowPhaseTime + m_collisionResolveTime;
+  sf::Uint64 time = m_colliderUpdateTime + m_AABBGenerationTime + m_treeGenerationTime + m_broadPhaseTime + m_narrowPhaseTime + m_collisionResolveTime;
   file << "Total time for all updates: " << std::to_string(time / 1000) << " milliseconds\n";
   file << "Average time per update: " << std::to_string(time / m_numUpdates) << " Micro Seconds\n\n";
 
   file << "Average time per system: \n";
+  file << "Average time for Collider Updates: " << std::to_string(m_colliderUpdateTime / m_numUpdates) << " Micro Seconds\n";
   file << "Average time for AABB generation: " << std::to_string(m_AABBGenerationTime / m_numUpdates) << " Micro Seconds\n";
   file << "Average time for partitioning tree generation: " << std::to_string(m_treeGenerationTime / m_numUpdates) << " Micro Seconds\n";
   file << "Average time for broad phase collision check: " << std::to_string(m_broadPhaseTime / m_numUpdates) << " Micro Seconds\n";
@@ -62,6 +69,17 @@ void CollisionSystem::RemoveCollider(CollisionComponent* a_collider)
     if (*it == a_collider)
       m_colliders.erase(it);
   }
+}
+
+
+void CollisionSystem::UpdateColliders()
+{
+  m_clock.restart();
+
+  for (CollisionComponent* col : m_colliders)
+    col->UpdateVertices();
+
+  m_colliderUpdateTime += m_clock.getElapsedTime().asMicroseconds();
 }
 
 void CollisionSystem::GenerateAABBs()
@@ -175,6 +193,33 @@ inline bool CollisionSystem::TestCollisionAABB(AABB* A, AABB* B)
   return true;
 }
 
+inline std::vector<glm::vec2> CollisionSystem::GetConvexColliderNormals(CollisionComponent * a_collider)
+{
+  std::vector<glm::vec2> verts = a_collider->GetWorldSpaceVertices();
+
+  std::vector<glm::vec2> normals;
+  // we need atleast 2 vertices to have a "shape"
+  if (verts.size() <= 1) 
+    return normals;
+
+  for (unsigned int i = 0; i < verts.size() - 1; i++)
+    normals.push_back(CalculateNormalBetweenTwoVertices(verts[i], verts[i + 1]));
+
+  // and add the axis from verts.last - verts.first
+  normals.push_back(CalculateNormalBetweenTwoVertices(verts.back(), verts.front()));
+  
+  return normals;
+}
+
+inline glm::vec2 CollisionSystem::CalculateNormalBetweenTwoVertices(glm::vec2 a_v1, glm::vec2 a_v2)
+{
+  // get the vector from p1->p2
+  glm::vec2 edge = a_v2 - a_v1;
+  // calculate the normal vector
+  glm::vec2 normal = glm::vec2(edge.y, -edge.x);
+  return normal;
+}
+
 bool CollisionSystem::CheckCircleCircleCollision(CollisionComponent* A, CollisionComponent* B)
 {
   CircleCollisionComponent* c1 = (CircleCollisionComponent*)A;
@@ -213,6 +258,8 @@ bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent * A, Collisi
 
 bool CollisionSystem::CheckConvexCollisions(CollisionComponent * A, CollisionComponent * B)
 {
+  // use the seperating axis theorem to check for collision
+
 
 
   return false;

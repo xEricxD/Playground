@@ -13,6 +13,7 @@ public:
 
   // Generate an AABB collision for the broad phase collision check
   virtual void GenerateAABB() override;
+  virtual void UpdateVertices() override;
 
 protected:
   virtual void AddVertices() override;

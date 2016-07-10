@@ -28,12 +28,14 @@ public:
   virtual void ShutDown() override;
 
   // Generate an AABB collision for the broad phase collision check
+  virtual void UpdateVertices();
   virtual void GenerateAABB();
 
   AABB* GetAABB() { return &m_AABB; }
   ColliderType GetColliderType() { return m_type; }
 
   void SetDrawDebug(bool a_value) { m_drawDebug = a_value; }
+  std::vector<glm::vec2> &GetWorldSpaceVertices() { return m_worldSpaceVertices; }
 
 protected:
   // for concave shapes
@@ -46,7 +48,8 @@ protected:
   AABB m_AABB;
   ColliderType m_type;
   // all vertices of the collider, in vertex space
-  std::vector<glm::vec2> m_vertices;
+  std::vector<glm::vec2> m_localSpaceVertices;
+  std::vector<glm::vec2> m_worldSpaceVertices;
   // if this object hasn't moved, we do not need to test for collision against other sleeping objects, since none of them moved
   bool m_isSleeping;
 

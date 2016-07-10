@@ -36,7 +36,7 @@ public:
   const glm::mat4 GetScaleMatrix() { return m_scalingMatrix; }
   const glm::mat4 GetRotationMatrix() { return m_rotationMatrix; }
 
-  bool HasChanged() { return m_changed; }
+  bool HasChanged();
   // since the transform doesnt have it's own update, we want to resest this bool from the physics system
   void ResetChanged() { m_changed = false; }
 

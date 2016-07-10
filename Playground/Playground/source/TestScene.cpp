@@ -32,14 +32,14 @@ void TestScene::Initialise()
   m_agent = new AgentObject();
   AddGameobject(m_agent);
   m_agent->GetNavigationComponent()->SetDrawDebug(true);
-  CircleCollisionComponent* collider = new CircleCollisionComponent();
+  ConvexCollisionComponent* collider = new ConvexCollisionComponent();
   m_agent->AddComponent(collider);
   collider->SetDrawDebug(true);
 
   AgentObject* agent = new AgentObject();
   AddGameobject(agent);
   agent->GetTransform()->SetLocalPosition(glm::vec3(200, 0, 0)); 
-  collider = new CircleCollisionComponent();
+  collider = new ConvexCollisionComponent();
   agent->AddComponent(collider);
   collider->SetDrawDebug(true);
 }

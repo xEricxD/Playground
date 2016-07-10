@@ -41,13 +41,26 @@ void ConvexCollisionComponent::GenerateAABB()
   m_AABB.max = glm::vec2(pos.x + 20, pos.y + 20);
 }
 
+void ConvexCollisionComponent::UpdateVertices()
+{
+  CollisionComponent::UpdateVertices();
+
+  if (m_isSleeping)
+    return;
+
+  m_worldSpaceVertices.clear();
+  // TODO - convert to world space
+  for (auto vert : m_localSpaceVertices)
+    m_worldSpaceVertices.push_back(vert);
+}
+
 void ConvexCollisionComponent::AddVertices()
 {
   // TODO - generate a simple circle for now
-  for (int i = 0; i <= 360; i += 20)
+  for (int i = 0; i <= 360; i += 60)
   {
     float x = (float)sin(i * (PI / 180)) * 20;
     float y = (float)cos(i * (PI / 180)) * 20;
-    m_vertices.push_back(glm::vec2(x, y));
+    m_localSpaceVertices.push_back(glm::vec2(x, y));
   }
 }

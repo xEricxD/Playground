@@ -18,6 +18,7 @@ void CollisionComponent::Initialise()
   Engine.GetCollisionSystem()->AddCollider(this);
   AddVertices();
   GenerateAABB();
+  UpdateVertices();
   GetTransform()->ResetChanged();
 }
 
@@ -34,9 +35,14 @@ void CollisionComponent::ShutDown()
   GameobjectComponent::ShutDown();
 }
 
+void CollisionComponent::UpdateVertices()
+{
+  m_isSleeping = (!m_transform->HasChanged());
+}
+
 void CollisionComponent::GenerateAABB()
 {
-  m_isSleeping = (!m_transform->HasChanged() && !GetOwner()->GetTransform()->HasChanged());
+  m_isSleeping = (!m_transform->HasChanged());
 }
 
 void CollisionComponent::GenerateConvexHull()
@@ -61,13 +67,13 @@ void CollisionComponent::DrawDebug()
   Engine.GetWindow().draw(box);
 
   // Draw the complex collider
-  if (m_vertices.size() < 2)
+  if (m_worldSpaceVertices.size() < 2)
     return;
 
-  for (unsigned int i = 0; i < m_vertices.size() - 1; i++)
+  for (unsigned int i = 0; i < m_worldSpaceVertices.size() - 1; i++)
   {
-    glm::vec2 vertex1 = ConvertVertexToViewSpace(m_vertices[i]);
-    glm::vec2 vertex2 = ConvertVertexToViewSpace(m_vertices[i + 1]);
+    glm::vec2 vertex1 = ConvertVertexToViewSpace(m_worldSpaceVertices[i]);
+    glm::vec2 vertex2 = ConvertVertexToViewSpace(m_worldSpaceVertices[i + 1]);
 
     // draw a line between them
     sf::Vertex line[]

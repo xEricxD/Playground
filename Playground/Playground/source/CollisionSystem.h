@@ -30,6 +30,8 @@ public:
   void ClearCollisionSystem() { m_colliders.clear(); }
 
 private:
+  // Update the colliders
+  void UpdateColliders();
   // Generate all AABB's
   void GenerateAABBs();
   // Rebuild the partitioning tree
@@ -46,13 +48,16 @@ private:
   // Perform simple AABB collision check
   inline bool TestCollisionAABB(AABB* A, AABB* B);
 
+  // Seperating axis theorem functions
+  inline std::vector<glm::vec2> GetConvexColliderNormals(CollisionComponent* a_collider);
+  inline glm::vec2 CalculateNormalBetweenTwoVertices(glm::vec2 a_v1, glm::vec2 a_v2);
+
   // Collision checking functions
   bool CheckCircleCircleCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckBoxCircleCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckCircleBoxCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckConvexCircleCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckCircleConvexCollision(CollisionComponent* A, CollisionComponent* B);
-
   bool CheckConvexCollisions(CollisionComponent* A, CollisionComponent* B);
 
   std::vector<CollisionComponent*> m_colliders; // Vector with all active colliders
@@ -66,6 +71,7 @@ private:
   
   // Debug variables
   sf::Clock m_clock;
+  sf::Int64 m_colliderUpdateTime;
   sf::Int64 m_AABBGenerationTime;
   sf::Int64 m_treeGenerationTime;
   sf::Int64 m_broadPhaseTime;
