@@ -2,8 +2,6 @@
 #include "Camera.h"
 #include "Engine.h"
 
-// TODO - move construct of transform to constructor, and update all gameobjects initialises once they have all been created
-
 GameObject::GameObject() : m_initialised(false), m_transform(nullptr), m_gameObjectType(GameObjectType::NONE)
 {
 }
@@ -45,8 +43,6 @@ void GameObject::AddComponent(GameobjectComponent * a_component)
 
   if (!a_component->HasBeenInitialised())
     a_component->Initialise();
-
-  a_component->GetTransform()->SetParent(GetTransform());
 
   m_components.push_back(a_component);
 }

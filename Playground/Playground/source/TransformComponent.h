@@ -32,13 +32,13 @@ public:
   const glm::vec3 GetRotation(CoordinateSpace a_space = CoordinateSpace::WORLD);
   const glm::vec3 GetScale(CoordinateSpace a_space = CoordinateSpace::WORLD);
 
-  const glm::mat4 GetTransformationMatrix() { return m_transform; }
-  const glm::mat4 GetScaleMatrix() { return m_scalingMatrix; }
-  const glm::mat4 GetRotationMatrix() { return m_rotationMatrix; }
+  const glm::mat4 GetTransformationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD); 
+  const glm::mat4 GetScaleMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD);
+  const glm::mat4 GetRotationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD);
 
   bool HasChanged();
-  // since the transform doesnt have it's own update, we want to resest this bool from the physics system
-  void ResetChanged() { m_changed = false; }
+  // since the transform doesnt have it's own update, we want to resest this bool from the collision system
+  void ResetChanged();
 
   void SetParent(TransformComponent* a_parent) { m_parent = a_parent; }
   TransformComponent* GetParent() { return m_parent; }

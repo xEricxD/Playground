@@ -51,11 +51,10 @@ private:
   // Seperating axis theorem functions
   inline std::vector<glm::vec2> GetConvexColliderNormals(CollisionComponent* a_collider);
   inline glm::vec2 CalculateNormalBetweenTwoVertices(glm::vec2 a_v1, glm::vec2 a_v2);
+  inline bool CheckOverlap(glm::vec2 a_projectionA, glm::vec2 a_projectionB);
 
   // Collision checking functions
   bool CheckCircleCircleCollision(CollisionComponent* A, CollisionComponent* B);
-  bool CheckBoxCircleCollision(CollisionComponent* A, CollisionComponent* B);
-  bool CheckCircleBoxCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckConvexCircleCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckCircleConvexCollision(CollisionComponent* A, CollisionComponent* B);
   bool CheckConvexCollisions(CollisionComponent* A, CollisionComponent* B);

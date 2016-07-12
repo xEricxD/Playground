@@ -92,9 +92,6 @@
     <ClCompile Include="source\QuadTreeScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="source\BoxCollisionComponent.cpp">
-      <Filter>Source Files\Components\Collision</Filter>
-    </ClCompile>
     <ClCompile Include="source\CircleCollisionComponent.cpp">
       <Filter>Source Files\Components\Collision</Filter>
     </ClCompile>
@@ -165,9 +162,6 @@
     </ClInclude>
     <ClInclude Include="source\QuadTreeScene.h">
       <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="source\BoxCollisionComponent.h">
-      <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="source\CircleCollisionComponent.h">
       <Filter>Header Files\Components\Collision</Filter>

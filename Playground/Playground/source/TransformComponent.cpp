@@ -117,6 +117,30 @@ const glm::vec3 TransformComponent::GetScale(CoordinateSpace a_space)
     return m_parent->GetScale(a_space) * m_scale;
 }
 
+const glm::mat4 TransformComponent::GetTransformationMatrix(CoordinateSpace a_space)
+{
+  if (!m_parent || a_space == CoordinateSpace::LOCAL)
+    return m_transform;
+  else
+    return m_transform * m_parent->GetTransformationMatrix(a_space);
+}
+
+const glm::mat4 TransformComponent::GetScaleMatrix(CoordinateSpace a_space)
+{
+  if (!m_parent || a_space == CoordinateSpace::LOCAL)
+    return m_scalingMatrix;
+  else
+    return m_scalingMatrix * m_parent->GetScaleMatrix(a_space);
+}
+
+const glm::mat4 TransformComponent::GetRotationMatrix(CoordinateSpace a_space)
+{
+  if (!m_parent || a_space == CoordinateSpace::LOCAL)
+    return m_rotationMatrix;
+  else
+    return m_rotationMatrix * m_parent->GetRotationMatrix(a_space);
+}
+
 bool TransformComponent::HasChanged()
 {
   if (m_changed)
@@ -125,6 +149,13 @@ bool TransformComponent::HasChanged()
     return m_parent->HasChanged();
   else
     return false;
+}
+
+void TransformComponent::ResetChanged()
+{
+  m_changed = false;
+  if (m_parent)
+    m_parent->ResetChanged();
 }
 
 void TransformComponent::UpdateRotation()

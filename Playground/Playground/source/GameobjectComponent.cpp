@@ -15,6 +15,7 @@ GameobjectComponent::~GameobjectComponent()
 void GameobjectComponent::Initialise()
 {
   m_transform = new TransformComponent();
+  m_transform->SetParent(GetOwner()->GetTransform());
 
   m_initialised = true;
 }

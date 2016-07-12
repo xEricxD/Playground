@@ -48,6 +48,8 @@ void CollisionSystem::ShutDown()
 
 void CollisionSystem::UpdateCollisionSystem()
 {
+  // Update all colliders
+  UpdateColliders();
   // Generate all the AABB's of our colliders
   GenerateAABBs();
   // Start by rebuilding our partitioning tree
@@ -87,7 +89,11 @@ void CollisionSystem::GenerateAABBs()
   m_clock.restart();
 
   for (CollisionComponent* col : m_colliders)
+  {
     col->GenerateAABB();
+
+    col->GetTransform()->ResetChanged();
+  }
 
   m_AABBGenerationTime += m_clock.getElapsedTime().asMicroseconds();
 }
@@ -168,12 +174,6 @@ inline void CollisionSystem::BuildCollisionMap()
   std::pair<CollisionComponent::ColliderType, CollisionComponent::ColliderType> pair(CollisionComponent::ColliderType::CIRCLE, CollisionComponent::ColliderType::CIRCLE);
   m_collisionMap[pair] = &CollisionSystem::CheckCircleCircleCollision;
 
-  pair.first = CollisionComponent::ColliderType::BOX, pair.second = CollisionComponent::ColliderType::CIRCLE;
-  m_collisionMap[pair] = &CollisionSystem::CheckBoxCircleCollision;
-
-  pair.first = CollisionComponent::ColliderType::CIRCLE, pair.second = CollisionComponent::ColliderType::BOX;
-  m_collisionMap[pair] = &CollisionSystem::CheckCircleBoxCollision;
-
   pair.first = CollisionComponent::ColliderType::CIRCLE, pair.second = CollisionComponent::ColliderType::CONVEX;
   m_collisionMap[pair] = &CollisionSystem::CheckCircleConvexCollision;
 
@@ -198,16 +198,13 @@ inline std::vector<glm::vec2> CollisionSystem::GetConvexColliderNormals(Collisio
   std::vector<glm::vec2> verts = a_collider->GetWorldSpaceVertices();
 
   std::vector<glm::vec2> normals;
-  // we need atleast 2 vertices to have a "shape"
-  if (verts.size() <= 1) 
-    return normals;
 
   for (unsigned int i = 0; i < verts.size() - 1; i++)
     normals.push_back(CalculateNormalBetweenTwoVertices(verts[i], verts[i + 1]));
 
   // and add the axis from verts.last - verts.first
   normals.push_back(CalculateNormalBetweenTwoVertices(verts.back(), verts.front()));
-  
+
   return normals;
 }
 
@@ -216,8 +213,27 @@ inline glm::vec2 CollisionSystem::CalculateNormalBetweenTwoVertices(glm::vec2 a_
   // get the vector from p1->p2
   glm::vec2 edge = a_v2 - a_v1;
   // calculate the normal vector
-  glm::vec2 normal = glm::vec2(edge.y, -edge.x);
+  glm::vec2 normal = glm::normalize(glm::vec2(edge.y, -edge.x));
   return normal;
+}
+
+inline bool CollisionSystem::CheckOverlap(glm::vec2 a_projectionA, glm::vec2 a_projectionB)
+{
+  // get projection with smallest min on the left side of our check
+  glm::vec2 p1 = a_projectionA;
+  glm::vec2 p2 = a_projectionB;
+  if (a_projectionA.x > a_projectionB.x)
+  {
+    p1 = a_projectionB;
+    p2 = a_projectionA;
+  }
+  
+  // check if there is a gap
+  // we know p1 is on the left side of the projection, so will always be overlap if p1max is not smaller than p2min
+  if (p1.y/*max*/ < p2.x/*min*/)
+    return false;
+
+  return true;
 }
 
 bool CollisionSystem::CheckCircleCircleCollision(CollisionComponent* A, CollisionComponent* B)
@@ -233,22 +249,12 @@ bool CollisionSystem::CheckCircleCircleCollision(CollisionComponent* A, Collisio
   return distanceSq <= radiusSq;
 }
 
-bool CollisionSystem::CheckBoxCircleCollision(CollisionComponent* A, CollisionComponent* B)
-{
-  return CheckCircleBoxCollision(B, A);
-}
-
-bool CollisionSystem::CheckCircleBoxCollision(CollisionComponent* A, CollisionComponent* B)
+bool CollisionSystem::CheckConvexCircleCollision(CollisionComponent* A, CollisionComponent* B)
 {
   return CheckCircleConvexCollision(B, A);
 }
 
-bool CollisionSystem::CheckConvexCircleCollision(CollisionComponent * A, CollisionComponent * B)
-{
-  return CheckCircleConvexCollision(B, A);
-}
-
-bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent * A, CollisionComponent * B)
+bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent* A, CollisionComponent * B)
 {
   CircleCollisionComponent* c1 = (CircleCollisionComponent*)A;
   ConvexCollisionComponent* c2 = (ConvexCollisionComponent*)B;
@@ -256,11 +262,29 @@ bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent * A, Collisi
   return false;
 }
 
-bool CollisionSystem::CheckConvexCollisions(CollisionComponent * A, CollisionComponent * B)
+bool CollisionSystem::CheckConvexCollisions(CollisionComponent* A, CollisionComponent* B)
 {
   // use the seperating axis theorem to check for collision
+  // make sure both colliders have atleast 2 verts
+  if (A->GetWorldSpaceVertices().size() <= 1 || B->GetWorldSpaceVertices().size() <= 1)
+    return false;
 
+  // Get all the axes we want to project on
+  std::vector<glm::vec2> axes = GetConvexColliderNormals(A);
+  std::vector<glm::vec2> axes2 = GetConvexColliderNormals(A);
+  //insert axes2 into axes so we have a single vector
+  axes.insert(axes.end(), axes2.begin(), axes2.end());
 
+  for (auto axis : axes)
+  {
+    // get the projection of both shapes
+    glm::vec2 p1 = A->GetProjection(axis);
+    glm::vec2 p2 = B->GetProjection(axis);
 
-  return false;
+    // if the shapes do not overlap on 1 axis, there is no collision
+    if (!CheckOverlap(p1, p2))
+      return false;
+  }
+
+  return true;
 }

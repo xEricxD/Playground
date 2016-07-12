@@ -15,7 +15,6 @@ public:
   enum ColliderType
   {
     CIRCLE = 0,
-    BOX,
     CONVEX,
     CONCAVE
   };
@@ -33,6 +32,8 @@ public:
 
   AABB* GetAABB() { return &m_AABB; }
   ColliderType GetColliderType() { return m_type; }
+  // get the projection of this shape on an axis, and return vec2(min, max)
+  glm::vec2 GetProjection(glm::vec2 a_axis);
 
   void SetDrawDebug(bool a_value) { m_drawDebug = a_value; }
   std::vector<glm::vec2> &GetWorldSpaceVertices() { return m_worldSpaceVertices; }

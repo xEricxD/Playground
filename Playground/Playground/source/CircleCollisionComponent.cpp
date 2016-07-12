@@ -46,7 +46,7 @@ void CircleCollisionComponent::DrawDebug()
   CollisionComponent::DrawDebug();
 
   // get the view matrix to get the correct draw position
-  glm::mat4 modelMatrix = m_transform->GetTransformationMatrix() * GetOwner()->GetTransform()->GetTransformationMatrix();
+  glm::mat4 modelMatrix = m_transform->GetTransformationMatrix();
   glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec4
 

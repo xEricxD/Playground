@@ -48,7 +48,7 @@ void GridNavigationComponent::TraversePath(float a_dt)
   if (m_activePath->path.size() > 0)
   {
     // get our target position
-    glm::vec2 position(m_transform->GetTransformationMatrix() * GetOwner()->GetTransform()->GetTransformationMatrix()[3]);
+    glm::vec2 position(m_transform->GetTransformationMatrix()[3]);
     glm::vec2 distanceVector = m_activePath->path.back() - position;
 
     if (distanceVector.x != 0 || distanceVector.y != 0)

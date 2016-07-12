@@ -22,7 +22,6 @@
     <ClCompile Include="source\AgentObject.cpp" />
     <ClCompile Include="source\AStarPathfinderObject.cpp" />
     <ClCompile Include="source\AStarScene.cpp" />
-    <ClCompile Include="source\BoxCollisionComponent.cpp" />
     <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\CircleCollisionComponent.cpp" />
     <ClCompile Include="source\CollisionComponent.cpp" />
@@ -47,7 +46,6 @@
     <ClInclude Include="source\AgentObject.h" />
     <ClInclude Include="source\AStarPathfinderObject.h" />
     <ClInclude Include="source\AStarScene.h" />
-    <ClInclude Include="source\BoxCollisionComponent.h" />
     <ClInclude Include="source\Camera.h" />
     <ClInclude Include="source\CircleCollisionComponent.h" />
     <ClInclude Include="source\CollisionComponent.h" />
