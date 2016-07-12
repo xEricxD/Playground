@@ -1,0 +1,50 @@
+************************************************* New debug session ***************************************************************************
+Date: 12-7-2016
+Time: 17:5:5
+Debug Session Length: 27.227180 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 7513
+Total time for all updates: 887 milliseconds
+Average time per update: 118 Micro Seconds
+
+Average time per system: 
+Average time for Collider Updates: 70 Micro Seconds
+Average time for AABB generation: 10 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 4 Micro Seconds
+Average time for narrow phase collision check: 26 Micro Seconds
+Average time for collision resolves: 3 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 12-7-2016
+Time: 17:5:23
+Debug Session Length: 2.007880 seconds
+Running in Debug
+**** A star Debug Information ****
+Number of path requests: 0
+Total time for all paths: 0 milliseconds
+Average time per path: 0 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 478
+Total time for all updates: 76 milliseconds
+Average time per update: 160 Micro Seconds
+
+Average time per system: 
+Average time for Collider Updates: 111 Micro Seconds
+Average time for AABB generation: 12 Micro Seconds
+Average time for partitioning tree generation: 1 Micro Seconds
+Average time for broad phase collision check: 4 Micro Seconds
+Average time for narrow phase collision check: 27 Micro Seconds
+Average time for collision resolves: 4 Micro Seconds
+
+********************************************************************************************************************************************
+

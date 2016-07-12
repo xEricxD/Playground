@@ -24,7 +24,7 @@ void TestScene::Initialise()
 
   GridObject* grid = new GridObject(glm::vec2(64, 64), glm::vec2(-32, -32), glm::vec2(64, 64));
   AddGameobject(grid);
-  grid->SetDrawDebug(true, true);
+  grid->SetDrawDebug(false, true);
 
   AStarPathfinderObject* pathfinder = new AStarPathfinderObject();
   AddGameobject(pathfinder);

@@ -37,6 +37,7 @@ public:
 
   void SetDrawDebug(bool a_value) { m_drawDebug = a_value; }
   std::vector<glm::vec2> &GetWorldSpaceVertices() { return m_worldSpaceVertices; }
+  bool IsSleeping() { return m_isSleeping; }
 
 protected:
   // for concave shapes

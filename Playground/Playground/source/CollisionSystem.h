@@ -36,6 +36,8 @@ private:
   void GenerateAABBs();
   // Rebuild the partitioning tree
   void BuildDynamicAABBTree();
+  // set all transforms to unchanged
+  void ResetTransforms();
   // Do a broad collision check using bounding boxes on every collider
   void PerformBroadPhaseCollisionCheck();
   // perform a narrow collision check on colliders that are potentially colliding

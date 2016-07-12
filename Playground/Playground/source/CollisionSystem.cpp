@@ -54,6 +54,8 @@ void CollisionSystem::UpdateCollisionSystem()
   GenerateAABBs();
   // Start by rebuilding our partitioning tree
   BuildDynamicAABBTree();
+  // Reset transform
+  ResetTransforms();
   // Then do the broad phase collision tests
   PerformBroadPhaseCollisionCheck();
   // Perform narrow phase
@@ -89,11 +91,7 @@ void CollisionSystem::GenerateAABBs()
   m_clock.restart();
 
   for (CollisionComponent* col : m_colliders)
-  {
     col->GenerateAABB();
-
-    col->GetTransform()->ResetChanged();
-  }
 
   m_AABBGenerationTime += m_clock.getElapsedTime().asMicroseconds();
 }
@@ -106,6 +104,12 @@ void CollisionSystem::BuildDynamicAABBTree()
   m_treeGenerationTime += m_clock.getElapsedTime().asMicroseconds();
 }
 
+void CollisionSystem::ResetTransforms()
+{
+  for (CollisionComponent* col : m_colliders)
+    col->GetTransform()->ResetChanged();
+}
+
 void CollisionSystem::PerformBroadPhaseCollisionCheck()
 {
   m_clock.restart();
@@ -115,15 +119,20 @@ void CollisionSystem::PerformBroadPhaseCollisionCheck()
   {
     for (unsigned int j = i + 1; j < m_colliders.size(); j++)
     {
-      AABB* A = m_colliders[i]->GetAABB();
-      AABB* B = m_colliders[j]->GetAABB();
+      CollisionComponent* c1 = m_colliders[i];
+      CollisionComponent* c2 = m_colliders[j];
 
+      // if both are sleeping, there can't be a new collision
+      if (c1->IsSleeping() && c2->IsSleeping())
+        continue;
+
+      AABB* A = c1->GetAABB();
+      AABB* B = c2->GetAABB();
       // perform collision check
       if (TestCollisionAABB(A, B))
       {
         // object might be colliding, add the pair to broad phase array for further inspection
-        std::pair<CollisionComponent*, CollisionComponent*> pair(m_colliders[i], m_colliders[j]);
-        m_broadPhaseCollision.push_back(pair);
+        m_broadPhaseCollision.push_back(std::pair<CollisionComponent*, CollisionComponent*>(c1, c2));
       }
     }
   }

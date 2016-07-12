@@ -110,6 +110,9 @@
     <ClCompile Include="source\ConvexCollisionComponent.cpp">
       <Filter>Source Files\Components\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="source\DynamicAABBTree.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Includes.h">
@@ -183,6 +186,9 @@
     </ClInclude>
     <ClInclude Include="source\ConvexCollisionComponent.h">
       <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="source\DynamicAABBTree.h">
+      <Filter>Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
