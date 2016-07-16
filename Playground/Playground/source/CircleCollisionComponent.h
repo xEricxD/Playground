@@ -15,7 +15,7 @@ public:
   virtual void GenerateAABB() override;
 
   void SetRadius(float a_radius) { m_radius = a_radius; }
-  float GetRadius() { return m_radius; }
+  const float GetRadius() { return m_radius; }
 
 private:
   virtual void DrawDebug() override;

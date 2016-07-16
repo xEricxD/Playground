@@ -28,20 +28,20 @@ public:
   void SetWorldRotation(glm::vec3 a_rotation);
   void SetWorldScale(glm::vec3 a_scale);
 
-  const glm::vec3 GetPosition(CoordinateSpace a_space = CoordinateSpace::WORLD);
-  const glm::vec3 GetRotation(CoordinateSpace a_space = CoordinateSpace::WORLD);
-  const glm::vec3 GetScale(CoordinateSpace a_space = CoordinateSpace::WORLD);
+  glm::vec3 GetPosition(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
+  glm::vec3 GetRotation(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
+  glm::vec3 GetScale(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
 
-  const glm::mat4 GetTransformationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD); 
-  const glm::mat4 GetScaleMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD);
-  const glm::mat4 GetRotationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD);
+  glm::mat4 GetTransformationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
+  glm::mat4 GetScaleMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
+  glm::mat4 GetRotationMatrix(CoordinateSpace a_space = CoordinateSpace::WORLD) const;
 
   bool HasChanged();
   // since the transform doesnt have it's own update, we want to resest this bool from the collision system
   void ResetChanged();
 
   void SetParent(TransformComponent* a_parent) { m_parent = a_parent; }
-  TransformComponent* GetParent() { return m_parent; }
+  TransformComponent* const GetParent() { return m_parent; }
 
 private:
   void UpdateRotation(); //call when a rotate or setrotation is called

@@ -93,7 +93,7 @@ void TransformComponent::Rotate(glm::vec3 a_rotation)
   UpdateRotation();
 }
 
-const glm::vec3 TransformComponent::GetPosition(CoordinateSpace a_space)
+glm::vec3 TransformComponent::GetPosition(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_position;
@@ -101,7 +101,7 @@ const glm::vec3 TransformComponent::GetPosition(CoordinateSpace a_space)
     return m_parent->GetPosition(a_space) + m_position;
 }
 
-const glm::vec3 TransformComponent::GetRotation(CoordinateSpace a_space)
+glm::vec3 TransformComponent::GetRotation(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_rotation;
@@ -109,7 +109,7 @@ const glm::vec3 TransformComponent::GetRotation(CoordinateSpace a_space)
     return m_parent->GetRotation(a_space) + m_rotation;
 }
 
-const glm::vec3 TransformComponent::GetScale(CoordinateSpace a_space)
+glm::vec3 TransformComponent::GetScale(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_scale;
@@ -117,7 +117,7 @@ const glm::vec3 TransformComponent::GetScale(CoordinateSpace a_space)
     return m_parent->GetScale(a_space) * m_scale;
 }
 
-const glm::mat4 TransformComponent::GetTransformationMatrix(CoordinateSpace a_space)
+glm::mat4 TransformComponent::GetTransformationMatrix(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_transform;
@@ -125,7 +125,7 @@ const glm::mat4 TransformComponent::GetTransformationMatrix(CoordinateSpace a_sp
     return m_transform * m_parent->GetTransformationMatrix(a_space);
 }
 
-const glm::mat4 TransformComponent::GetScaleMatrix(CoordinateSpace a_space)
+glm::mat4 TransformComponent::GetScaleMatrix(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_scalingMatrix;
@@ -133,7 +133,7 @@ const glm::mat4 TransformComponent::GetScaleMatrix(CoordinateSpace a_space)
     return m_scalingMatrix * m_parent->GetScaleMatrix(a_space);
 }
 
-const glm::mat4 TransformComponent::GetRotationMatrix(CoordinateSpace a_space)
+glm::mat4 TransformComponent::GetRotationMatrix(CoordinateSpace a_space) const
 {
   if (!m_parent || a_space == CoordinateSpace::LOCAL)
     return m_rotationMatrix;

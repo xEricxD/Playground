@@ -74,7 +74,7 @@ void GridObject::ResizeGrid(glm::vec2 a_newSize, glm::vec2 a_offset)
   GenerateGrid();
 }
 
-Node* GridObject::GetNodeByPosition(glm::vec2 a_position)
+Node* const GridObject::GetNodeByPosition(glm::vec2 a_position)
 {
   glm::vec2 startPositionOfGrid(m_offset.x * m_nodeSize.x, m_offset.y * m_nodeSize.y);
   glm::vec2 offset = -startPositionOfGrid + a_position;
@@ -86,7 +86,7 @@ Node* GridObject::GetNodeByPosition(glm::vec2 a_position)
   return GetNodeByIndex(glm::vec2(xIndex, yIndex));
 }
 
-Node* GridObject::GetNodeByIndex(glm::vec2 a_index)
+Node* const GridObject::GetNodeByIndex(glm::vec2 a_index)
 {
   // make sure we're looking inside grid bounds
   if (a_index.x >= 0 && a_index.y >= 0 && a_index.x < m_size.x && a_index.y < m_size.y)

@@ -27,12 +27,12 @@ public:
   virtual void Update(float a_dt);
   virtual void ShutDown();
 
-  ComponentType GetType() { return m_componentType; }
+  const ComponentType GetType() { return m_componentType; }
   TransformComponent* GetTransform() { return m_transform; }
 
   bool HasBeenInitialised() { return m_initialised; }
 
-  GameObject* GetOwner() { return m_owner; }
+  GameObject* const GetOwner() { return m_owner; }
   void SetOwner(GameObject* a_owner) { m_owner = a_owner; }
 
 protected:

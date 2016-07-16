@@ -24,15 +24,15 @@ public:
   void Update();
 
 
-  sf::RenderWindow& GetWindow() { return m_window; }
-  sf::View& GetViewport() { return m_viewport; }
+  sf::RenderWindow &GetWindow() { return m_window; }
+  sf::View &GetViewport() { return m_viewport; }
 
   std::vector<GameObject*> GetGameObjectsByType(GameObject::GameObjectType a_type);
 
-  float GetWorldDeltaTime() { return m_dt; }
+  const float GetWorldDeltaTime() { return m_dt; }
 
-  Camera &GetCamera() { return m_mainCamera; }
-  CollisionSystem* GetCollisionSystem() { return m_collisionSystem; }
+  Camera& GetCamera() { return m_mainCamera; }
+  CollisionSystem* const GetCollisionSystem() { return m_collisionSystem; }
 
 private:
   EngineSingleton() {}

@@ -46,12 +46,12 @@ public:
   void ResizeGrid(glm::vec2 a_newSize);
   void ResizeGrid(glm::vec2 a_newSize, glm::vec2 a_offset);
 
-  Node* GetNodeByPosition(glm::vec2 a_position);
-  Node* GetNodeByIndex(glm::vec2 a_index);
+  Node* const GetNodeByPosition(glm::vec2 a_position);
+  Node* const GetNodeByIndex(glm::vec2 a_index);
 
-  glm::vec2 GetNodeSize() { return m_nodeSize; }
-  glm::vec2 GetGridSize() { return m_size; }
-  glm::vec2 GetOffset() { return m_offset; }
+  const glm::vec2 GetNodeSize() { return m_nodeSize; }
+  const glm::vec2 GetGridSize() { return m_size; }
+  const glm::vec2 GetOffset() { return m_offset; }
 
   void SetNodeSize(glm::vec2 a_nodeSize) { m_nodeSize = a_nodeSize; }
   void SetGridSize(glm::vec2 a_size) { m_size = a_size; }

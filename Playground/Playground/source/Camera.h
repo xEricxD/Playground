@@ -16,7 +16,7 @@ public:
   void SetPosition(glm::vec3 a_pos); //set position in world space
   void Translate(glm::vec3 a_pos); //move in local space
 
-  TransformComponent &GetTransform() { return m_transform; }
+  const TransformComponent &GetTransform() { return m_transform; }
   const glm::vec3 &GetPosition() { return m_transform.GetPosition(); }
   const glm::vec3 &GetRight() { return m_right; }
   const glm::vec3 &GetUp() { return m_up; }

@@ -19,7 +19,7 @@ public:
   void RequestPath(GameObject* a_requester, glm::vec2 a_startPosition, glm::vec2 a_goalPosition);
   void RequestPath(GameObject* a_requester, Node* a_startNode, Node* a_goalNode);
 
-  GridObject* GetGridObject() { return m_grid; }
+  GridObject* const GetGridObject() { return m_grid; }
 
 private:
   inline void SearchLoop(PathfindingPacket a_packet);
