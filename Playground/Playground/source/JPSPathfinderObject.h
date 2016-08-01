@@ -4,7 +4,6 @@
 #include "PathfindingStructs.h"
 #include <queue>
 
-// TODO - have base class for all pathfinders with all main functions
 // TODO - fix corner cutting
 
 class JPSPathfinderObject : public PathfinderObject
