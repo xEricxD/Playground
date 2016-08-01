@@ -1,5 +1,6 @@
 #include "GridNavigationComponent.h"
 #include "AStarPathfinderObject.h"
+#include "JPSPathfinderObject.h"
 #include "Engine.h"
 
 GridNavigationComponent::GridNavigationComponent() : m_activePath(nullptr), m_pathfinder(nullptr), m_wander(false)
@@ -17,9 +18,9 @@ void GridNavigationComponent::Initialise()
   m_componentType = GameobjectComponent::ComponentType::GRIDNAVIGATION;
 
   // find the pathfinder in our active scene
-  std::vector<GameObject*> pathfinder = Engine.GetGameObjectsByType(GameObject::GameObjectType::ASTARPATHFINDER);
+  std::vector<GameObject*> pathfinder = Engine.GetGameObjectsByType(GameObject::GameObjectType::PATHFINDER);
   if (!pathfinder.empty())
-    m_pathfinder = (AStarPathfinderObject*)pathfinder[0];
+    m_pathfinder = (JPSPathfinderObject*)pathfinder[0];
 }
 
 void GridNavigationComponent::Update(float a_dt)
@@ -58,7 +59,7 @@ void GridNavigationComponent::TraversePath(float a_dt)
       GetOwner()->GetTransform()->Translate(translation);
     }
 
-    // check if we're close enough to pop this node of the path
+    // check if we're close enough to pop this PathfindingNode of the path
     if (glm::length(distanceVector) < 5)
     {
       m_activePath->path.pop_back();
@@ -105,12 +106,19 @@ void GridNavigationComponent::DrawDebug()
   if (!m_drawDebug || !m_activePath)
     return;
 
-  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
   for (unsigned int i = 0; i < m_activePath->path.size() - 1; i++)
   {
     glm::vec2 pos1 = m_activePath->path[i] + drawPosition;
+
+    sf::CircleShape circle;
+    circle.setRadius(5);
+    circle.setFillColor(sf::Color::Black);
+    circle.setPosition(sf::Vector2f(pos1.x - 5, pos1.y - 5));
+    Engine.GetWindow().draw(circle);
+
     glm::vec2 pos2 = m_activePath->path[i + 1] + drawPosition;
 
     sf::Vertex line[]

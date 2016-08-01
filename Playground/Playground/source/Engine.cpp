@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include "ScenesInclude.h"
-#include "AStarScene.h"
 #include "CollisionSystem.h"
 #include <iostream>
 #include <fstream>
@@ -57,7 +56,7 @@ void EngineSingleton::InitEngine()
   m_collisionSystem->Initialise();
 
   // Add all scenes we want in the world
-  TestScene* scene1 = new TestScene();
+  Scene* scene1 = new PathfindingScene();
   m_activeScene = scene1;
   scene1->Initialise();
   m_scenes.push_back(scene1);

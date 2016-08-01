@@ -73,7 +73,7 @@ void CollisionComponent::DrawDebug()
 {
   // get the view matrix to get the correct draw position
   glm::mat4 modelMatrix = m_transform->GetTransformationMatrix();
-  glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec4
 
   // Draw the AABB
@@ -124,7 +124,7 @@ inline glm::vec2 CollisionComponent::ConvertVertexToViewSpace(glm::vec2 a_vertex
   vertexMatrix[3] = glm::vec4(a_vertex, 0, 1); // insert the vertex position into the matrix
 
   // convert to screen space
-  glm::mat4 viewMatrix = vertexMatrix * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = vertexMatrix * glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
 
   return glm::vec2(viewMatrix[3]);
 }

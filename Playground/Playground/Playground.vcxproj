@@ -21,7 +21,8 @@
   <ItemGroup>
     <ClCompile Include="source\AgentObject.cpp" />
     <ClCompile Include="source\AStarPathfinderObject.cpp" />
-    <ClCompile Include="source\AStarScene.cpp" />
+    <ClCompile Include="source\PathfinderObject.cpp" />
+    <ClCompile Include="source\PathfindingScene.cpp" />
     <ClCompile Include="source\Camera.cpp" />
     <ClCompile Include="source\CircleCollisionComponent.cpp" />
     <ClCompile Include="source\CollisionComponent.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="source\GridNavigationComponent.cpp" />
     <ClCompile Include="source\GridObject.cpp" />
     <ClCompile Include="source\GridSavingComponent.cpp" />
+    <ClCompile Include="source\JPSPathfinderObject.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\QuadTreeObject.cpp" />
     <ClCompile Include="source\QuadTreeScene.cpp" />
@@ -46,7 +48,8 @@
   <ItemGroup>
     <ClInclude Include="source\AgentObject.h" />
     <ClInclude Include="source\AStarPathfinderObject.h" />
-    <ClInclude Include="source\AStarScene.h" />
+    <ClInclude Include="source\PathfinderObject.h" />
+    <ClInclude Include="source\PathfindingScene.h" />
     <ClInclude Include="source\Camera.h" />
     <ClInclude Include="source\CircleCollisionComponent.h" />
     <ClInclude Include="source\CollisionComponent.h" />
@@ -60,6 +63,7 @@
     <ClInclude Include="source\GridObject.h" />
     <ClInclude Include="source\GridSavingComponent.h" />
     <ClInclude Include="source\Includes.h" />
+    <ClInclude Include="source\JPSPathfinderObject.h" />
     <ClInclude Include="source\PathfindingStructs.h" />
     <ClInclude Include="source\QuadTreeObject.h" />
     <ClInclude Include="source\QuadTreeScene.h" />

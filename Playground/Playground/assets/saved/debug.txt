@@ -1,75 +1,100 @@
 ************************************************* New debug session ***************************************************************************
-Date: 12-7-2016
-Time: 17:5:5
-Debug Session Length: 27.227180 seconds
-Running in Debug
-**** A star Debug Information ****
-Number of path requests: 0
-Total time for all paths: 0 milliseconds
-Average time per path: 0 Micro Seconds
+Date: 1-8-2016
+Time: 18:6:38
+Debug Session Length: 91.810234 seconds
+Running in Release
+**** Jump Point Search Debug Information ****
+Number of path requests: 10477
+Total time for all paths: 871 milliseconds
+Average time per path: 83 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 7513
-Total time for all updates: 887 milliseconds
-Average time per update: 118 Micro Seconds
+Number of Updates: 39552
+Total time for all updates: 393 milliseconds
+Average time per update: 9 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 70 Micro Seconds
-Average time for AABB generation: 10 Micro Seconds
+Average time for Collider Updates: 2 Micro Seconds
+Average time for AABB generation: 1 Micro Seconds
 Average time for partitioning tree generation: 1 Micro Seconds
-Average time for broad phase collision check: 4 Micro Seconds
-Average time for narrow phase collision check: 26 Micro Seconds
-Average time for collision resolves: 3 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
 
 ********************************************************************************************************************************************
 
 ************************************************* New debug session ***************************************************************************
-Date: 12-7-2016
-Time: 17:5:23
-Debug Session Length: 2.007880 seconds
-Running in Debug
+Date: 1-8-2016
+Time: 18:11:52
+Debug Session Length: 86.204819 seconds
+Running in Release
 **** A star Debug Information ****
-Number of path requests: 0
-Total time for all paths: 0 milliseconds
-Average time per path: 0 Micro Seconds
+Number of path requests: 9881
+Total time for all paths: 697 milliseconds
+Average time per path: 70 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 478
-Total time for all updates: 76 milliseconds
-Average time per update: 160 Micro Seconds
+Number of Updates: 33913
+Total time for all updates: 611 milliseconds
+Average time per update: 18 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 111 Micro Seconds
-Average time for AABB generation: 12 Micro Seconds
-Average time for partitioning tree generation: 1 Micro Seconds
-Average time for broad phase collision check: 4 Micro Seconds
-Average time for narrow phase collision check: 27 Micro Seconds
-Average time for collision resolves: 4 Micro Seconds
+Average time for Collider Updates: 6 Micro Seconds
+Average time for AABB generation: 2 Micro Seconds
+Average time for partitioning tree generation: 2 Micro Seconds
+Average time for broad phase collision check: 2 Micro Seconds
+Average time for narrow phase collision check: 2 Micro Seconds
+Average time for collision resolves: 2 Micro Seconds
 
 ********************************************************************************************************************************************
 
 ************************************************* New debug session ***************************************************************************
-Date: 16-7-2016
-Time: 17:1:48
-Debug Session Length: 3.078219 seconds
-Running in Debug
-**** A star Debug Information ****
-Number of path requests: 0
-Total time for all paths: 0 milliseconds
-Average time per path: 0 Micro Seconds
+Date: 1-8-2016
+Time: 18:23:29
+Debug Session Length: 17.854908 seconds
+Running in Release
+**** Jump Point Search Debug Information ****
+Number of path requests: 2676
+Total time for all paths: 273 milliseconds
+Average time per path: 102 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 780
-Total time for all updates: 30 milliseconds
-Average time per update: 38 Micro Seconds
+Number of Updates: 6400
+Total time for all updates: 160 milliseconds
+Average time per update: 25 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 14 Micro Seconds
-Average time for AABB generation: 5 Micro Seconds
-Average time for partitioning tree generation: 3 Micro Seconds
-Average time for broad phase collision check: 3 Micro Seconds
-Average time for narrow phase collision check: 5 Micro Seconds
-Average time for collision resolves: 5 Micro Seconds
+Average time for Collider Updates: 8 Micro Seconds
+Average time for AABB generation: 4 Micro Seconds
+Average time for partitioning tree generation: 2 Micro Seconds
+Average time for broad phase collision check: 2 Micro Seconds
+Average time for narrow phase collision check: 3 Micro Seconds
+Average time for collision resolves: 2 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 1-8-2016
+Time: 18:25:52
+Debug Session Length: 4.092884 seconds
+Running in Release
+**** A star Debug Information ****
+Number of path requests: 1086
+Total time for all paths: 38 milliseconds
+Average time per path: 35 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 1179
+Total time for all updates: 34 milliseconds
+Average time per update: 29 Micro Seconds
+
+Average time per system: 
+Average time for Collider Updates: 11 Micro Seconds
+Average time for AABB generation: 4 Micro Seconds
+Average time for partitioning tree generation: 2 Micro Seconds
+Average time for broad phase collision check: 2 Micro Seconds
+Average time for narrow phase collision check: 2 Micro Seconds
+Average time for collision resolves: 6 Micro Seconds
 
 ********************************************************************************************************************************************
 

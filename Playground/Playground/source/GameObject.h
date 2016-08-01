@@ -12,7 +12,7 @@ public:
     NONE = 0,
 
     GRID,
-    ASTARPATHFINDER,
+    PATHFINDER,
     AGENT,
 
     COUNT

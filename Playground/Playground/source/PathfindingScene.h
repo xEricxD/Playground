@@ -3,11 +3,11 @@
 
 class AgentObject;
 
-class AStarScene : public Scene
+class PathfindingScene : public Scene
 {
 public:
-  AStarScene();
-  virtual ~AStarScene() override;
+  PathfindingScene();
+  virtual ~PathfindingScene() override;
 
   virtual void Initialise() override;
   virtual void Update(float a_dt) override;

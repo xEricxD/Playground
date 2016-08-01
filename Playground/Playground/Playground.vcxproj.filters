@@ -98,9 +98,6 @@
     <ClCompile Include="source\CollisionComponent.cpp">
       <Filter>Source Files\Components\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="source\AStarScene.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="source\Engine.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
@@ -113,11 +110,17 @@
     <ClCompile Include="source\DynamicAABBTree.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
+    <ClCompile Include="source\JPSPathfinderObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PathfindingScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PathfinderObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Includes.h">
-      <Filter>Header Files\World</Filter>
-    </ClInclude>
     <ClInclude Include="source\Camera.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
@@ -172,9 +175,6 @@
     <ClInclude Include="source\CollisionComponent.h">
       <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="source\AStarScene.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="source\ScenesInclude.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
@@ -189,6 +189,18 @@
     </ClInclude>
     <ClInclude Include="source\DynamicAABBTree.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="source\JPSPathfinderObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathfindingScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PathfinderObject.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

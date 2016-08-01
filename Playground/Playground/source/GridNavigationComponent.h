@@ -4,7 +4,8 @@
 
 // TODO - make base class for pathfinder
 
-class AStarPathfinderObject;
+class AStarPathfinderObject; 
+class JPSPathfinderObject;
 
 class GridNavigationComponent : public GameobjectComponent
 {
@@ -30,7 +31,7 @@ private:
   bool m_drawDebug;
   bool m_wander;
 
-  AStarPathfinderObject* m_pathfinder;
+  JPSPathfinderObject* m_pathfinder;
   Path* m_activePath;
 };
 

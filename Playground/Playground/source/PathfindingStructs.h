@@ -2,7 +2,7 @@
 #include "Includes.h"
 #include <vector>
 
-struct Node;
+struct PathfindingNode;
 class GameObject;
 
 struct Path
@@ -13,6 +13,6 @@ struct Path
 struct PathfindingPacket
 {
   GameObject* requestingActor;
-  Node* startNode;
-  Node* goalNode;
+  PathfindingNode* startNode;
+  PathfindingNode* goalNode;
 };

@@ -13,9 +13,9 @@ enum ListStatus
 };
 
 // individual nodes for the grid
-struct Node
+struct PathfindingNode
 {
-  Node() : neighbors(), parentNode(nullptr), f(0), g(0), h(0), available(true), listStatus(ListStatus::NONE)
+  PathfindingNode() : neighbors(), parentNode(nullptr), f(0), g(0), h(0), available(true), listStatus(ListStatus::NONE)
   {}
 
   glm::vec2 position;
@@ -28,8 +28,8 @@ struct Node
 
   ListStatus listStatus;
 
-  Node* parentNode;
-  Node* neighbors[8];
+  PathfindingNode* parentNode;
+  PathfindingNode* neighbors[8];
 };
 
 // pathfinding grid class
@@ -46,8 +46,8 @@ public:
   void ResizeGrid(glm::vec2 a_newSize);
   void ResizeGrid(glm::vec2 a_newSize, glm::vec2 a_offset);
 
-  Node* const GetNodeByPosition(glm::vec2 a_position);
-  Node* const GetNodeByIndex(glm::vec2 a_index);
+  PathfindingNode* const GetNodeByPosition(glm::vec2 a_position);
+  PathfindingNode* const GetNodeByIndex(glm::vec2 a_index);
 
   const glm::vec2 GetNodeSize() { return m_nodeSize; }
   const glm::vec2 GetGridSize() { return m_size; }
@@ -61,7 +61,7 @@ public:
   void ClearGrid();
   void GenerateGrid();
   void UpdateAllNeighbors();
-  void UpdateNodeAvailability(Node* a_node);
+  void UpdateNodeAvailability(PathfindingNode* a_node);
 
   void LoadGridFromFile();
 
@@ -70,13 +70,13 @@ public:
 private:
   void DrawDebugGrid();
 
-  void FindNeighbors(Node &a_node);
+  void FindNeighbors(PathfindingNode &a_node);
   // TODO -> render differently?
   sf::Sprite m_sprite;
   sf::Texture m_texture;
 
   // Array with all the grid nodes
-  std::vector<Node> m_grid;
+  std::vector<PathfindingNode> m_grid;
 
   glm::vec2 m_nodeSize;
   glm::vec2 m_offset;

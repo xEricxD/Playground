@@ -28,7 +28,7 @@ void SpriteComponent::Update(float a_dt)
   // render the sprite
   // use worlds active camera for transformations
   glm::mat4 modelMatrix = m_transform->GetTransformationMatrix();
-  glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = modelMatrix * glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
   
   // get the position from the matrix, and use it to draw the sprite
   glm::vec3 pos(viewMatrix[3]);

@@ -31,7 +31,7 @@ public:
 
   const float GetWorldDeltaTime() { return m_dt; }
 
-  Camera& GetCamera() { return m_mainCamera; }
+  Camera& GetActiveCamera() { return m_mainCamera; }
   CollisionSystem* const GetCollisionSystem() { return m_collisionSystem; }
 
 private:

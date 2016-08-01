@@ -267,6 +267,7 @@ bool CollisionSystem::CheckCircleConvexCollision(CollisionComponent* A, Collisio
 {
   CircleCollisionComponent* c1 = (CircleCollisionComponent*)A;
   ConvexCollisionComponent* c2 = (ConvexCollisionComponent*)B;
+  c1, c2;
 
   return false;
 }

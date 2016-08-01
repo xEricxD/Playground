@@ -2,15 +2,15 @@
 #include "Includes.h"
 #include "CollisionComponent.h"
 
-// a node for tree branches / leaves
-struct Node
+// a PathfindingNode for tree branches / leaves
+struct TreeNode
 {
-  Node()
+  TreeNode()
     : Parent(nullptr), left(nullptr), right(nullptr)
   {
   }
 
-  // if the node has no children, it is a leaf node
+  // if the PathfindingNode has no children, it is a leaf PathfindingNode
   bool IsLeaf() const { return left == nullptr; }
 
   void UpdateAABB()
@@ -29,20 +29,20 @@ struct Node
     }
   }
 
-  // parent node
-  Node* Parent;
+  // parent PathfindingNode
+  TreeNode* Parent;
   // for easy access to left / right children
   union
   {
     struct 
     {
-      Node* left;
-      Node* right;
+      TreeNode* left;
+      TreeNode* right;
     };
-    Node* children[2];
+    TreeNode* children[2];
   };
 
-  // the collider stored in this node
+  // the collider stored in this PathfindingNode
   CollisionComponent* collider;
   // "fat" aabb of the collider
   AABB aabb;
@@ -58,8 +58,8 @@ public:
   ~DynamicAABBTree();
 
 private:
-  std::vector<Node*> m_nodes;
+  std::vector<TreeNode*> m_nodes;
 
-  Node* m_root;
+  TreeNode* m_root;
 };
 

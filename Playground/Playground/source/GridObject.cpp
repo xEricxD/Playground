@@ -4,6 +4,7 @@
 #include "GridEditorComponent.h"
 
 // TODO - make automatic grid generator?
+#define USING_JPS
 
 GridObject::GridObject() : m_size(glm::vec2(32, 32)), m_nodeSize(glm::vec2(64, 64)), m_offset(glm::vec2(0)),
                            m_drawDebug(false)
@@ -45,13 +46,13 @@ void GridObject::Update(float a_dt)
   GameObject::Update(a_dt);
 
   // render the walls
-  for (auto node : m_grid)
+  for (auto PathfindingNode : m_grid)
   {
-    if (!node.available)
+    if (!PathfindingNode.available)
     {
-      glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+      glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
       glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
-      m_sprite.setPosition(sf::Vector2f(node.position.x + drawPosition.x, node.position.y + drawPosition.y));
+      m_sprite.setPosition(sf::Vector2f(PathfindingNode.position.x + drawPosition.x, PathfindingNode.position.y + drawPosition.y));
       Engine.GetWindow().draw(m_sprite);
     }
   }
@@ -74,7 +75,7 @@ void GridObject::ResizeGrid(glm::vec2 a_newSize, glm::vec2 a_offset)
   GenerateGrid();
 }
 
-Node* const GridObject::GetNodeByPosition(glm::vec2 a_position)
+PathfindingNode* const GridObject::GetNodeByPosition(glm::vec2 a_position)
 {
   glm::vec2 startPositionOfGrid(m_offset.x * m_nodeSize.x, m_offset.y * m_nodeSize.y);
   glm::vec2 offset = -startPositionOfGrid + a_position;
@@ -86,11 +87,11 @@ Node* const GridObject::GetNodeByPosition(glm::vec2 a_position)
   return GetNodeByIndex(glm::vec2(xIndex, yIndex));
 }
 
-Node* const GridObject::GetNodeByIndex(glm::vec2 a_index)
+PathfindingNode* const GridObject::GetNodeByIndex(glm::vec2 a_index)
 {
   // make sure we're looking inside grid bounds
   if (a_index.x >= 0 && a_index.y >= 0 && a_index.x < m_size.x && a_index.y < m_size.y)
-    return &m_grid[(unsigned int)(a_index.x + a_index.y * m_size.x)]; // return the node we're looking for
+    return &m_grid[(unsigned int)(a_index.x + a_index.y * m_size.x)]; // return the PathfindingNode we're looking for
   
   return nullptr;
 }
@@ -118,8 +119,8 @@ void GridObject::GenerateGrid()
     currentNodePos.x = startPosition.x + counter.x * m_nodeSize.x;
     currentNodePos.y = startPosition.y + counter.y * m_nodeSize.y;
 
-    // generate a new node with all the correct values
-    Node newNode = Node();
+    // generate a new PathfindingNode with all the correct values
+    PathfindingNode newNode = PathfindingNode();
     newNode.position = currentNodePos;
     newNode.gridIndex = counter;
 
@@ -134,7 +135,7 @@ void GridObject::GenerateGrid()
     }
   }
 
-  // now search for all the neighbors of each node
+  // now search for all the neighbors of each PathfindingNode
   for (int i = 0; i < gridSize; i++)
     FindNeighbors(m_grid[i]);
 }
@@ -142,7 +143,7 @@ void GridObject::GenerateGrid()
 void GridObject::UpdateAllNeighbors()
 {
   int gridSize = (int)(m_size.x * m_size.y);
-  // now search for all the neighbors of each node
+  // now search for all the neighbors of each PathfindingNode
   for (int i = 0; i < gridSize; i++)
   {
     for (int j = 0; j < 8; j++)
@@ -151,12 +152,12 @@ void GridObject::UpdateAllNeighbors()
   }
 }
 
-void GridObject::UpdateNodeAvailability(Node* a_node)
+void GridObject::UpdateNodeAvailability(PathfindingNode* a_node)
 {
   // update the nodes availability
   a_node->available = !a_node->available;
 
-  std::vector<Node*> currentNeighbors;
+  std::vector<PathfindingNode*> currentNeighbors;
   for (auto neighbor : a_node->neighbors)
   {
     if (neighbor)
@@ -191,6 +192,9 @@ glm::vec2 GridObject::GetRandomPositionOnGrid()
   int gridSize = (int)(m_size.x * m_size.y);
   int rnd = rand() % gridSize - 1;
 
+  if (rnd < 0)
+    rnd = 0;
+
   unsigned int spinCount = 0;
   while (!m_grid[rnd].available && spinCount < 100)
   {
@@ -201,14 +205,14 @@ glm::vec2 GridObject::GetRandomPositionOnGrid()
   return m_grid[rnd].position;
 }
 
-void GridObject::FindNeighbors(Node& a_node)
+void GridObject::FindNeighbors(PathfindingNode& a_node)
 {
-  // if the node isn't available, we will never need it's neighbors, so there's no point setting them
+  // if the PathfindingNode isn't available, we will never need it's neighbors, so there's no point setting them
   if (!a_node.available)
     return;
 
   // set left neighbor
-  Node* n = GetNodeByIndex(a_node.gridIndex + glm::vec2(-1, 0));
+  PathfindingNode* n = GetNodeByIndex(a_node.gridIndex + glm::vec2(-1, 0));
   if (n && n->available)
     a_node.neighbors[0] = n;
   //right
@@ -225,8 +229,9 @@ void GridObject::FindNeighbors(Node& a_node)
     a_node.neighbors[3] = n;
 
   //now add diagonals
+#ifndef USING_JPS 
   //left - top
-  //if top or left node is not a neighbor yet, we can't move to the diagonal because one of those nodes is unavailable, which means we would move into a wall
+  //if top or left PathfindingNode is not a neighbor yet, we can't move to the diagonal because one of those nodes is unavailable, which means we would move into a wall
   if (a_node.neighbors[0] && a_node.neighbors[2])
   {
     n = GetNodeByIndex(a_node.gridIndex + glm::vec2(-1, -1));
@@ -254,22 +259,40 @@ void GridObject::FindNeighbors(Node& a_node)
     if (n && n->available)
       a_node.neighbors[7] = n;
   }
+#else
+  //left - top
+  n = GetNodeByIndex(a_node.gridIndex + glm::vec2(-1, -1));
+  if (n && n->available)
+    a_node.neighbors[4] = n;
+  //left - bottom
+  n = GetNodeByIndex(a_node.gridIndex + glm::vec2(-1, 1));
+  if (n && n->available)
+    a_node.neighbors[5] = n;
+  //right - top
+  n = GetNodeByIndex(a_node.gridIndex + glm::vec2(1, -1));
+  if (n && n->available)
+    a_node.neighbors[6] = n;
+  //right - bottom
+  n = GetNodeByIndex(a_node.gridIndex + glm::vec2(1, 1));
+  if (n && n->available)
+    a_node.neighbors[7] = n;
+#endif
 }
 
 void GridObject::ClearGrid()
 {
-  for (Node &node : m_grid)
+  for (PathfindingNode &PathfindingNode : m_grid)
   {
-    node.f = node.h = node.g = 0;
-    node.listStatus = ListStatus::NONE;
-    node.parentNode = nullptr;
+    PathfindingNode.f = PathfindingNode.h = PathfindingNode.g = 0;
+    PathfindingNode.listStatus = ListStatus::NONE;
+    PathfindingNode.parentNode = nullptr;
   }
 }
 
 void GridObject::DrawDebugGrid()
 {
   // get the view matrix to get the correct draw position
-  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = m_transform->GetTransformationMatrix() * glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
   if (m_drawSimple)
@@ -307,17 +330,17 @@ void GridObject::DrawDebugGrid()
   }
   else
   {
-    // draw a box for each node
+    // draw a box for each PathfindingNode
     sf::RectangleShape box(sf::Vector2f(m_nodeSize.x, m_nodeSize.y));
     box.setOrigin(sf::Vector2f(m_nodeSize.x, m_nodeSize.y) * 0.5f);
     box.setFillColor(sf::Color::Transparent);
     box.setOutlineThickness(1.f);
 
-    for (Node &node : m_grid)
+    for (PathfindingNode &PathfindingNode : m_grid)
     {
-      box.setPosition(sf::Vector2f(node.position.x + drawPosition.x, node.position.y + drawPosition.y));
+      box.setPosition(sf::Vector2f(PathfindingNode.position.x + drawPosition.x, PathfindingNode.position.y + drawPosition.y));
 
-      if (node.available)
+      if (PathfindingNode.available)
         box.setOutlineColor(sf::Color::White);
       else
         box.setOutlineColor(sf::Color::Red);

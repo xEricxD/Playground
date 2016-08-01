@@ -56,7 +56,7 @@ void GridSavingComponent::SaveGridData(std::string a_filepath)
   {
     for (int x = 0; x < size.x; x++)
     {
-      Node* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
+      PathfindingNode* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
       (n && n->available) ? file << "1 " : file << "0 ";
     }
     file << "\n";
@@ -101,7 +101,7 @@ void GridSavingComponent::LoadGridData(std::string a_filepath)
     nodeSize.x = std::stof(line);
     std::getline(file, line);
     nodeSize.y = std::stof(line);
-    printf("node size: (%f, %f)\n", nodeSize.x, nodeSize.y);
+    printf("PathfindingNode size: (%f, %f)\n", nodeSize.x, nodeSize.y);
 
     // generate the grid after loading in all the data
     m_grid->SetNodeSize(nodeSize);
@@ -117,7 +117,7 @@ void GridSavingComponent::LoadGridData(std::string a_filepath)
       {
         file >> val;
         //printf("%i ", val);
-        Node* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
+        PathfindingNode* n = m_grid->GetNodeByIndex(glm::vec2(x, y));
         if (n)
           n->available = val;
       }

@@ -45,10 +45,10 @@ void GridEditorComponent::UpdateGridNode()
   glm::vec2 halfscreen((int)(Engine.GetWindow().getSize().x * 0.5f), (int)(Engine.GetWindow().getSize().y * 0.5f));
 
   // use worlds active camera for transformations
-  glm::mat4 viewMatrix = glm::inverse(Engine.GetCamera().GetTransform().GetTransformationMatrix());
+  glm::mat4 viewMatrix = glm::inverse(Engine.GetActiveCamera().GetTransform().GetTransformationMatrix());
   glm::vec2 drawPosition(viewMatrix[3]); // get the x and y component from the vec3
 
-  Node* n = m_grid->GetNodeByPosition(mousePos - halfscreen - drawPosition);
+  PathfindingNode* n = m_grid->GetNodeByPosition(mousePos - halfscreen - drawPosition);
   if (n)
     m_grid->UpdateNodeAvailability(n);
 }
