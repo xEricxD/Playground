@@ -3,6 +3,7 @@
 #include "AgentObject.h"
 #include <iostream>
 #include <fstream>
+#include <math.h>
 
 //references
 //http://zerowidth.com/2013/05/05/jump-point-search-explained.html
@@ -120,24 +121,18 @@ void JPSPathfinderObject::SearchLoop(PathfindingPacket &a_packet)
       return;
     }
 
-    PathfindingNode* node = m_openList[0];
+    auto lowestNode = m_openList.begin();
 
     // get the node with the lowest f value of the open list
-    for (PathfindingNode* n : m_openList)
-    {
-      if (node->f > n->f)
-        node = n;
-    }
-
-    // remove lowest f node form open list
     for (auto it = m_openList.begin(); it != m_openList.end(); it++)
     {
-      if (*it == node)
-      {
-        m_openList.erase(it);
-        break;
-      }
+      if ((*lowestNode)->f > (*it)->f)
+        lowestNode = it;
     }
+
+    // remove lowest f node from the open list
+    PathfindingNode* node = *lowestNode;
+    m_openList.erase(lowestNode);
 
     if (node != a_packet.goalNode)
     {
@@ -180,10 +175,7 @@ void JPSPathfinderObject::AddNeighbors(PathfindingNode* a_node)
     dir.y = clamp(dir.y, -1, 1);
 
     // test if we're jumping diagonal or straight
-    if (dir.x != 0 && dir.y != 0)
-      neighbors = JumpDiagonal(a_node, dir);
-    else
-      neighbors = JumpStraight(a_node, dir);
+    neighbors = (dir.x != 0 && dir.y != 0) ? JumpDiagonal(a_node, dir) : JumpStraight(a_node, dir);
   }
   else //no parent cell -> dont prune any neighbors
   {
@@ -202,8 +194,7 @@ void JPSPathfinderObject::AddNeighbors(PathfindingNode* a_node)
     dir.x = clamp(dir.x, -1, 1);
     dir.y = clamp(dir.y, -1, 1);
 
-    PathfindingPacket current;
-    current = m_pathQueue.front();
+    PathfindingPacket current = m_pathQueue.front();
     PathfindingNode* jumpPoint = FindJumpPoint(a_node, dir, current.startNode, current.goalNode);
     if (jumpPoint && jumpPoint->listStatus == ListStatus::NONE)
     {
@@ -222,13 +213,13 @@ short JPSPathfinderObject::GetGValueJPS(PathfindingNode* a_jumpPoint, Pathfindin
 {
   glm::vec2 dir = a_jumpPoint->gridIndex - a_parent->gridIndex;
   if (dir.x != 0 && dir.y != 0)
-    return (short)fabsf(((a_jumpPoint->gridIndex.x - a_parent->gridIndex.x)) * 14);
+    return (short)abs(((a_jumpPoint->gridIndex.x - a_parent->gridIndex.x)) * 14);
   else
   {
     if (dir.x != 0)
-      return (short)fabs(((a_jumpPoint->gridIndex.x - a_parent->gridIndex.x)) * 10);
+      return (short)abs(((a_jumpPoint->gridIndex.x - a_parent->gridIndex.x)) * 10);
     else
-      return (short)fabs(((a_jumpPoint->gridIndex.y - a_parent->gridIndex.y)) * 10);
+      return (short)abs(((a_jumpPoint->gridIndex.y - a_parent->gridIndex.y)) * 10);
   }
 }
 

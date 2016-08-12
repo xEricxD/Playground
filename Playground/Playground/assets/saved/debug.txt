@@ -1,100 +1,100 @@
 ************************************************* New debug session ***************************************************************************
-Date: 1-8-2016
-Time: 18:6:38
-Debug Session Length: 91.810234 seconds
+Date: 12-8-2016
+Time: 21:17:15
+Debug Session Length: 32.961155 seconds
 Running in Release
 **** Jump Point Search Debug Information ****
-Number of path requests: 10477
-Total time for all paths: 871 milliseconds
-Average time per path: 83 Micro Seconds
+Number of path requests: 4294
+Total time for all paths: 407 milliseconds
+Average time per path: 94 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 39552
-Total time for all updates: 393 milliseconds
-Average time per update: 9 Micro Seconds
+Number of Updates: 12757
+Total time for all updates: 195 milliseconds
+Average time per update: 15 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 2 Micro Seconds
-Average time for AABB generation: 1 Micro Seconds
-Average time for partitioning tree generation: 1 Micro Seconds
-Average time for broad phase collision check: 1 Micro Seconds
-Average time for narrow phase collision check: 1 Micro Seconds
-Average time for collision resolves: 1 Micro Seconds
-
-********************************************************************************************************************************************
-
-************************************************* New debug session ***************************************************************************
-Date: 1-8-2016
-Time: 18:11:52
-Debug Session Length: 86.204819 seconds
-Running in Release
-**** A star Debug Information ****
-Number of path requests: 9881
-Total time for all paths: 697 milliseconds
-Average time per path: 70 Micro Seconds
-
-**** Collision system Debug Information ****
-Number of Updates: 33913
-Total time for all updates: 611 milliseconds
-Average time per update: 18 Micro Seconds
-
-Average time per system: 
-Average time for Collider Updates: 6 Micro Seconds
+Average time for Collider Updates: 4 Micro Seconds
 Average time for AABB generation: 2 Micro Seconds
 Average time for partitioning tree generation: 2 Micro Seconds
-Average time for broad phase collision check: 2 Micro Seconds
-Average time for narrow phase collision check: 2 Micro Seconds
+Average time for broad phase collision check: 1 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
 Average time for collision resolves: 2 Micro Seconds
 
 ********************************************************************************************************************************************
 
 ************************************************* New debug session ***************************************************************************
-Date: 1-8-2016
-Time: 18:23:29
-Debug Session Length: 17.854908 seconds
+Date: 12-8-2016
+Time: 21:18:5
+Debug Session Length: 22.322918 seconds
 Running in Release
 **** Jump Point Search Debug Information ****
-Number of path requests: 2676
-Total time for all paths: 273 milliseconds
-Average time per path: 102 Micro Seconds
+Number of path requests: 3112
+Total time for all paths: 394 milliseconds
+Average time per path: 126 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 6400
-Total time for all updates: 160 milliseconds
-Average time per update: 25 Micro Seconds
+Number of Updates: 8360
+Total time for all updates: 128 milliseconds
+Average time per update: 15 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 8 Micro Seconds
-Average time for AABB generation: 4 Micro Seconds
+Average time for Collider Updates: 4 Micro Seconds
+Average time for AABB generation: 2 Micro Seconds
 Average time for partitioning tree generation: 2 Micro Seconds
 Average time for broad phase collision check: 2 Micro Seconds
+Average time for narrow phase collision check: 1 Micro Seconds
+Average time for collision resolves: 2 Micro Seconds
+
+********************************************************************************************************************************************
+
+************************************************* New debug session ***************************************************************************
+Date: 12-8-2016
+Time: 21:27:53
+Debug Session Length: 73.164413 seconds
+Running in Release
+**** Jump Point Search Debug Information ****
+Number of path requests: 8475
+Total time for all paths: 995 milliseconds
+Average time per path: 117 Micro Seconds
+
+**** Collision system Debug Information ****
+Number of Updates: 26183
+Total time for all updates: 613 milliseconds
+Average time per update: 23 Micro Seconds
+
+Average time per system: 
+Average time for Collider Updates: 7 Micro Seconds
+Average time for AABB generation: 2 Micro Seconds
+Average time for partitioning tree generation: 3 Micro Seconds
+Average time for broad phase collision check: 3 Micro Seconds
 Average time for narrow phase collision check: 3 Micro Seconds
 Average time for collision resolves: 2 Micro Seconds
 
 ********************************************************************************************************************************************
 
 ************************************************* New debug session ***************************************************************************
-Date: 1-8-2016
-Time: 18:25:52
-Debug Session Length: 4.092884 seconds
+Date: 12-8-2016
+Time: 21:29:20
+Debug Session Length: 48.072754 seconds
 Running in Release
 **** A star Debug Information ****
-Number of path requests: 1086
-Total time for all paths: 38 milliseconds
-Average time per path: 35 Micro Seconds
+Number of path requests: 5876
+Total time for all paths: 339 milliseconds
+Average time per path: 57 Micro Seconds
 
 **** Collision system Debug Information ****
-Number of Updates: 1179
-Total time for all updates: 34 milliseconds
-Average time per update: 29 Micro Seconds
+Number of Updates: 19259
+Total time for all updates: 292 milliseconds
+Average time per update: 15 Micro Seconds
 
 Average time per system: 
-Average time for Collider Updates: 11 Micro Seconds
-Average time for AABB generation: 4 Micro Seconds
+Average time for Collider Updates: 4 Micro Seconds
+Average time for AABB generation: 2 Micro Seconds
 Average time for partitioning tree generation: 2 Micro Seconds
 Average time for broad phase collision check: 2 Micro Seconds
 Average time for narrow phase collision check: 2 Micro Seconds
-Average time for collision resolves: 6 Micro Seconds
+Average time for collision resolves: 1 Micro Seconds
 
 ********************************************************************************************************************************************
 

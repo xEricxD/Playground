@@ -13,7 +13,7 @@
 #define START_NODE glm::vec2(45, 42)
 #define GOAL_NODE glm::vec2(42,39)
 
-#define USE_ASTAR
+//#define USE_ASTAR
 
 PathfindingScene::PathfindingScene()
 {
